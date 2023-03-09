@@ -1,15 +1,23 @@
-import React from 'react';
+import GetProposal from './GetProposal';
+import GetVoter from './GetVoter';
 
-import useEth from '../../../contexts/EthContext/useEth';
-
-export default function Voter() {
-  const {
-    state: { contract, accounts, web3 }
-  } = useEth();
-
+export default function Voter({ whitelist }) {
   return (
     <>
-      <div className="card">TODO</div>
+      <div className="card">
+        {whitelist ? (
+          <>
+            <div>
+              <GetProposal />
+            </div>
+            <div>
+              <GetVoter />
+            </div>
+          </>
+        ) : (
+          'You are not whitelisted'
+        )}
+      </div>
     </>
   );
 }

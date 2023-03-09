@@ -18,7 +18,7 @@ export default function Events() {
 
   const getEvents = useCallback(async () => {
     await contract.events
-      .valueChanged({ fromBlock: 'earliest' })
+      .VoterRegistered({ fromBlock: 'earliest' })
       .on('data', (event) => {
         setEvents([...events, event]);
       })
@@ -29,7 +29,7 @@ export default function Events() {
 
   useEffect(() => {
     if (contract) {
-      getOldEvents();
+      // getOldEvents();
       getEvents();
     }
   }, [contract, getOldEvents, getEvents]);

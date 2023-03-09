@@ -1,22 +1,23 @@
+import useEth from '../../../contexts/EthContext/useEth';
+
+import { useState } from 'react';
+
 import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
 
-import useEth from '../../contexts/EthContext/useEth';
-
-export default function Admin() {
+export default function GetVoter() {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
+  const [voter, setVoter] = useState('');
 
   const {
     state: { contract, accounts, web3 }
   } = useEth();
 
-  async function addVoter() {
+  async function getVoter() {
     if (web3.utils.isAddress(address)) {
       try {
-        await contract.methods.addVoter(address).send({ from: accounts[0] });
-        setAddress('');
-        console.log('success');
+        const _voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
+        setVoter(_voter);
       } catch (error) {
         console.log(error);
       }
@@ -39,9 +40,10 @@ export default function Admin() {
             setAddress(event.target.value);
           }}
         />
-        <Button variant="contained" onClick={addVoter}>
-          Add
+        <Button variant="contained" onClick={getVoter}>
+          Get Voter
         </Button>
+        {voter}
       </div>
     </>
   );
