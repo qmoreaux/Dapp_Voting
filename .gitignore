@@ -5,8 +5,13 @@ node_modules
 .pnp
 .pnp.js
 
+#artifacts
+
+
 # Production
 build
+client/src/contracts
+client/*/src/contracts
 
 # Testing
 coverage
