@@ -1,22 +1,22 @@
-import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Button, TextField } from '@mui/material';
+import React, { useState } from 'react';
 
-import useEth from "../contexts/EthContext/useEth";
+import useEth from '../../contexts/EthContext/useEth';
 
 export default function Admin() {
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
 
   const {
-    state: { contract, accounts, web3 },
+    state: { contract, accounts, web3 }
   } = useEth();
 
   async function addVoter() {
     if (web3.utils.isAddress(address)) {
       try {
         await contract.methods.addVoter(address).send({ from: accounts[0] });
-        setAddress("");
-        console.log("success");
+        setAddress('');
+        console.log('success');
       } catch (error) {
         console.log(error);
       }
@@ -26,7 +26,7 @@ export default function Admin() {
   }
   return (
     <>
-      <div style={{ marginTop: 100, marginBottom: 100 }}>
+      <div className="card">
         <TextField
           size="small"
           error={error}
@@ -34,7 +34,7 @@ export default function Admin() {
           label="Voter Address"
           defaultValue=""
           value={address}
-          helperText={error && "Invalid address"}
+          helperText={error && 'Invalid address'}
           onChange={(event) => {
             setError(false);
             setAddress(event.target.value);

@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 
-import Whitelisted from './Whitelisted'
-import NotWhitelisted from './NotWhitelisted'
-import useEth from '../../contexts/EthContext/useEth';
+import Whitelisted from './Whitelisted';
+import NotWhitelisted from './NotWhitelisted';
+import useEth from '../../../contexts/EthContext/useEth';
 
 export default function Voter() {
   const {
@@ -25,15 +25,15 @@ export default function Voter() {
 
   const getNewEvents = useCallback(async () => {
     await contract.events
-          .VoterRegistered({ fromBlock: 'earliest' })
-          .on('data', (event) => {
-            if (event.returnValues.voterAddress === accounts[0]) {
-              setWhitelist(true);
-            }
-          })
-          .on('changed', (changed) => console.log(changed))
-          .on('error', (err) => console.log(err))
-          .on('connected', (str) => console.log(str));
+      .VoterRegistered({ fromBlock: 'earliest' })
+      .on('data', (event) => {
+        if (event.returnValues.voterAddress === accounts[0]) {
+          setWhitelist(true);
+        }
+      })
+      .on('changed', (changed) => console.log(changed))
+      .on('error', (err) => console.log(err))
+      .on('connected', (str) => console.log(str));
   }, [contract, accounts]);
 
   useEffect(() => {
@@ -45,11 +45,7 @@ export default function Voter() {
 
   return (
     <>
-      <div>
-      {
-        whitelist ? <Whitelisted /> : <NotWhitelisted />
-      }
-      </div>
+      <div className="card">{whitelist ? <Whitelisted /> : <NotWhitelisted />}</div>
     </>
   );
 }

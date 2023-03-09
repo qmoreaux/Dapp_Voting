@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useEth from '../../contexts/EthContext/useEth';
+import useEth from '../../../contexts/EthContext/useEth';
 
 export default function Voter() {
   const {
@@ -9,7 +9,7 @@ export default function Voter() {
 
   return (
     <>
-      <div>TODO</div>
+      <div className="card">TODO</div>
     </>
   );
 }

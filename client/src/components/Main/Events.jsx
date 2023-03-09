@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import React, { useEffect, useState, useCallback } from 'react';
-import useEth from '../contexts/EthContext/useEth';
+import useEth from '../../contexts/EthContext/useEth';
 
 export default function Events() {
   const [events, setEvents] = useState([]);
