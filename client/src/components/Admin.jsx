@@ -15,6 +15,7 @@ export default function Admin() {
     if (web3.utils.isAddress(address)) {
       try {
         await contract.methods.addVoter(address).send({ from: accounts[0] });
+        setAddress("");
         console.log("success");
       } catch (error) {
         console.log(error);
@@ -25,13 +26,14 @@ export default function Admin() {
   }
   return (
     <>
-      <div style={{ margin: 100 }}>
+      <div style={{ marginTop: 100, marginBottom: 100 }}>
         <TextField
           size="small"
           error={error}
           id="outlined-error-helper-text"
           label="Voter Address"
           defaultValue=""
+          value={address}
           helperText={error && "Invalid address"}
           onChange={(event) => {
             setError(false);

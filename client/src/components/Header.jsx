@@ -10,7 +10,6 @@ export default function Header() {
     state: { accounts },
   } = useEth();
 
-  console.log(accounts && accounts[0]);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

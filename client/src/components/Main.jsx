@@ -1,10 +1,13 @@
+import { Container } from "@mui/material";
 import * as React from "react";
 import Admin from "./Admin";
+import Events from "./Events";
 
 export default function Main() {
   return (
-    <div>
+    <Container maxWidth="xl">
       <Admin />
-    </div>
+      <Events />
+    </Container>
   );
 }
