@@ -17,14 +17,14 @@ export default function Events() {
   }, [contract]);
 
   const getEvents = useCallback(async () => {
-    await contract.events
-      .valueChanged({ fromBlock: "earliest" })
-      .on("data", (event) => {
-        setEvents([...events, event]);
-      })
-      .on("changed", (changed) => console.log(changed))
-      .on("error", (err) => console.log(err))
-      .on("connected", (str) => console.log(str));
+    // await contract.events
+    //   .valueChanged({ fromBlock: "earliest" })
+    //   .on("data", (event) => {
+    //     setEvents([...events, event]);
+    //   })
+    //   .on("changed", (changed) => console.log(changed))
+    //   .on("error", (err) => console.log(err))
+    //   .on("connected", (str) => console.log(str));
   }, [contract, events]);
 
   useEffect(() => {
