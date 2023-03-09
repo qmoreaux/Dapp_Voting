@@ -7,7 +7,8 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 contract Voting is Ownable {
 
     uint public winningProposalID;
-    
+    uint private tmpWinningProposalID;
+
     struct Voter {
         bool isRegistered;
         bool hasVoted;
@@ -91,6 +92,10 @@ contract Voting is Ownable {
         voters[msg.sender].hasVoted = true;
         proposalsArray[_id].voteCount++;
 
+        if (proposalsArray[_id].voteCount > proposalsArray[tmpWinningProposalID].voteCount) {
+            tmpWinningProposalID = _id;
+        }
+
         emit Voted(msg.sender, _id);
     }
 
@@ -129,15 +134,10 @@ contract Voting is Ownable {
 
    function tallyVotes() external onlyOwner {
        require(workflowStatus == WorkflowStatus.VotingSessionEnded, "Current status is not voting session ended");
-       uint _winningProposalId;
-      for (uint256 p = 0; p < proposalsArray.length; p++) {
-           if (proposalsArray[p].voteCount > proposalsArray[_winningProposalId].voteCount) {
-               _winningProposalId = p;
-          }
-       }
-       winningProposalID = _winningProposalId;
-       
-       workflowStatus = WorkflowStatus.VotesTallied;
-       emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
+
+        winningProposalID = tmpWinningProposalID;
+
+        workflowStatus = WorkflowStatus.VotesTallied;
+        emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
     }
 }
