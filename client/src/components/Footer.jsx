@@ -1,17 +1,14 @@
-function Link({ uri, text }) {
-  return <a href={uri} target="_blank" rel="noreferrer">{text}</a>;
-}
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 
-function Footer() {
+export default function Footer() {
   return (
-    <footer>
-      <h2>More resources</h2>
-      <Link uri={"https://trufflesuite.com"} text={"Truffle"} />
-      <Link uri={"https://reactjs.org"} text={"React"} />
-      <Link uri={"https://soliditylang.org"} text={"Solidity"} />
-      <Link uri={"https://ethereum.org"} text={"Ethereum"} />
-    </footer >
+    <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
+      <Toolbar>
+        <Box sx={{ flexGrow: 1 }} />
+      </Toolbar>
+    </AppBar>
   );
 }
-
-export default Footer;
