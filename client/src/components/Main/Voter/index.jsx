@@ -29,7 +29,7 @@ export default function Voter({ whitelist, contract, accounts }) {
 
   return (
     <>
-      <Card className="voter" sx={{ height: '100%', backgroundColor: '#e7ebf0' }}>
+      <Card className="voter" sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}>
         <CardContent>
           {whitelist ? (
             <Stack height="100%" justifyContent="space-evenly" alignItems="center">
@@ -43,7 +43,9 @@ export default function Voter({ whitelist, contract, accounts }) {
               )}
             </Stack>
           ) : (
-            <NotWhitelisted />
+            <Stack height="100%" justifyContent="center" sx={{ textAlign: 'center' }}>
+              <NotWhitelisted />
+            </Stack>
           )}
         </CardContent>
       </Card>

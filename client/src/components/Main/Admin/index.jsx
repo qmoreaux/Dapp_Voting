@@ -7,7 +7,7 @@ import WorkflowButton from './WorkflowButton';
 import useEvents from '../../../hooks/useEvents';
 import useStatus from '../../../hooks/useStatus';
 
-export default function Admin({contract, accounts, web3}) {
+export default function Admin({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,9 +32,7 @@ export default function Admin({contract, accounts, web3}) {
   async function handleWorkflow() {
     setLoading(true);
     try {
-      await contract.methods
-        .startProposalsRegistering()
-        .send({ from: accounts[0] });
+      await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
       console.log('success');
     } catch (error) {
       console.log(error);
@@ -43,16 +41,9 @@ export default function Admin({contract, accounts, web3}) {
   }
 
   return (
-    <Card sx={{ height: '100%', backgroundColor: '#e7ebf0' }}>
+    <Card sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}>
       <CardContent>
-        <Grid
-          height="100%"
-          display={'flex'}
-          flexDirection="column"
-          justifyContent={'center'}
-          container
-          spacing={2}
-        >
+        <Grid height="100%" display={'flex'} flexDirection="column" justifyContent={'center'} container spacing={2}>
           {status === 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
               <TextField
@@ -76,11 +67,7 @@ export default function Admin({contract, accounts, web3}) {
           )}
           {events.length > 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
-              <WorkflowButton
-                loading={loading}
-                status={status}
-                handleWorkflow={handleWorkflow}
-              />
+              <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} />
             </Grid>
           )}
         </Grid>

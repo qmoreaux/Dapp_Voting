@@ -21,14 +21,7 @@ export default function SubmitProposal({ contract, accounts }) {
   }
 
   return (
-    <Grid
-      width="calc(100% - 80px)"
-      height="100%"
-      display={'flex'}
-      flexDirection="column"
-      justifyContent={'center'}
-      container
-    >
+    <Grid width="calc(100% - 80px)" display={'flex'} flexDirection="column" justifyContent={'center'} container>
       <Grid item display={'flex'} flexDirection={'column'} justifyContent={'center'}>
         <TextField
           sx={{ mb: 2 }}
