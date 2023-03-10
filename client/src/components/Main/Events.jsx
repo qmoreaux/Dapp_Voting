@@ -29,17 +29,24 @@ export default function Events() {
 
   useEffect(() => {
     if (contract) {
-      // getOldEvents();
+      getOldEvents();
+    }
+  }, [contract, getOldEvents]);
+
+  useEffect(() => {
+    if (contract) {
       getEvents();
     }
-  }, [contract, getOldEvents, getEvents]);
+  }, [contract, getEvents]);
 
   return (
     <div>
       <Typography variant="h6"> Voters:</Typography>
 
       {events.map((event) => (
-        <Typography key={event.id}>{event.returnValues.voterAddress}</Typography>
+        <Typography key={event.id}>
+          {event.returnValues.voterAddress}
+        </Typography>
       ))}
     </div>
   );
