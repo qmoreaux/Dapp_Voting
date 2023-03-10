@@ -27,7 +27,6 @@ h3 {
 }
 
 .search .with-border .element-container {
-  min-height: 50px;
 }
 
 .search .with-border .element-container .element {
@@ -41,7 +40,7 @@ h3 {
 
 .search .with-border .element-container .element .element-label {
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 12px;
   margin-bottom: 3px;
 }
