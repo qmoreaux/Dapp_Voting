@@ -2,19 +2,23 @@ import { useState } from 'react';
 
 import { Button, TextField } from '@mui/material';
 
+import useAlert from '../../../contexts/AlertContext/useAlert';
+
 export default function GetVoter({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [voter, setVoter] = useState('');
 
+  const { addAlert } = useAlert();
+
   async function getVoter() {
     if (web3.utils.isAddress(address)) {
       try {
         const _voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
-        console.log(_voter);
         setVoter(_voter);
       } catch (error) {
         console.log(error);
+        addAlert({ message: error.message, severity: 'error' });
       }
     } else {
       setError(true);

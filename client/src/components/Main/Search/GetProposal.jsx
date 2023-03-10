@@ -2,9 +2,13 @@ import { useState } from 'react';
 
 import { Button, TextField } from '@mui/material';
 
+import useAlert from '../../../contexts/AlertContext/useAlert';
+
 export default function GetProposal({ contract, accounts }) {
   const [proposalID, setProposalID] = useState('');
   const [proposal, setProposal] = useState('');
+
+  const { addAlert } = useAlert();
 
   const handleInputChange = (e) => {
     if (/^\d+$|^$/.test(e.target.value)) {
@@ -18,6 +22,7 @@ export default function GetProposal({ contract, accounts }) {
       setProposal(_proposal);
     } catch (error) {
       console.log(error);
+      addAlert({ message: error.message, severity: 'error' });
     }
   }
 

@@ -2,16 +2,21 @@ import { useState } from 'react';
 
 import { Grid, TextField, Button } from '@mui/material';
 
+import useAlert from '../../../contexts/AlertContext/useAlert';
+
 export default function SubmitProposal({ contract, accounts }) {
   const [description, setDescription] = useState('');
+
+  const { addAlert } = useAlert();
 
   async function submitProposal() {
     try {
       await contract.methods.addProposal(description).send({ from: accounts[0] });
       setDescription('');
-      console.log('success');
+      addAlert({ message: `Proposal added : ${description}`, severity: 'success' });
     } catch (error) {
       console.log(error);
+      addAlert({ message: error.message, severity: 'error' });
     }
   }
 
