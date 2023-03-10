@@ -51,24 +51,26 @@ export default function Main() {
   }, [contract, accounts, getOldEvents, getNewEvents]);
 
   return (
-    <>
-      <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 100 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Admin />
-          </Grid>
-          <Grid item xs={4}>
-            <Voter whitelist={whitelist} />
-          </Grid>
-          <Grid item xs={4}>
-            <Search whitelist={whitelist} />
-          </Grid>
+    <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 100 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Admin />
         </Grid>
-      </Container>
-      <Container maxWidth="xl">
-        <HorizontalStepper />
-        <Events />
-      </Container>
-    </>
+        <Grid item xs={4}>
+          <Voter whitelist={whitelist} />
+        </Grid>
+        <Grid item xs={4}>
+          <Search whitelist={whitelist} />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <HorizontalStepper />
+        </Grid>
+        <Grid item xs={12}>
+          <Events />
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
