@@ -45,6 +45,7 @@ export default function Main() {
 
   useEffect(() => {
     if (contract && accounts) {
+      setWhitelist(false);
       getOldEvents();
       getNewEvents();
     }
@@ -57,10 +58,10 @@ export default function Main() {
           <Admin />
         </Grid>
         <Grid item xs={4}>
-          <Voter whitelist={whitelist} />
+          <Voter whitelist={whitelist} contract={contract} />
         </Grid>
         <Grid item xs={4}>
-          <Search whitelist={whitelist} />
+          <Search whitelist={whitelist} contract={contract} />
         </Grid>
       </Grid>
       <Grid container spacing={2}>

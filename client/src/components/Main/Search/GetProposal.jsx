@@ -28,11 +28,16 @@ export default function GetProposal() {
 
   return (
     <>
-      <TextField size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
-      <Button variant="contained" onClick={getProposal}>
-        Get Proposal
-      </Button>
-      <div>{proposal}</div>
+      <div className="with-border">
+        <label>Get Proposal</label>
+        <div>
+          <TextField size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
+          <Button variant="contained" onClick={getProposal}>
+            Get
+          </Button>
+        </div>
+        <div className="element-container">{proposal}</div>
+      </div>
     </>
   );
 }

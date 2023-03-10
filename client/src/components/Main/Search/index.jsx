@@ -1,21 +1,21 @@
 import GetProposal from './GetProposal';
 import GetVoter from './GetVoter';
+import NotWhitelisted from '../NotWhitelisted';
+
+import './Search.css';
 
 export default function Voter({ whitelist }) {
   return (
     <>
-      <div className="card">
+      <div className="card-item search">
         {whitelist ? (
           <>
-            <div>
-              <GetProposal />
-            </div>
-            <div>
-              <GetVoter />
-            </div>
+            <h3>Search</h3>
+            <GetProposal />
+            <GetVoter />
           </>
         ) : (
-          'You are not whitelisted'
+          <NotWhitelisted />
         )}
       </div>
     </>
