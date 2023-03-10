@@ -13,7 +13,7 @@ import useEth from '../../contexts/EthContext/useEth';
 
 export default function Main() {
   const {
-    state: { contract, accounts }
+    state: { contract, accounts, web3 }
   } = useEth();
 
   const [whitelist, setWhitelist] = useState(false);
@@ -55,13 +55,13 @@ export default function Main() {
     <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 100 }}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Admin />
+          <Admin contract={contract} accounts={accounts} web3={web3}/>
         </Grid>
         <Grid item xs={4}>
           <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
         </Grid>
         <Grid item xs={4}>
-          <Search whitelist={whitelist} contract={contract} />
+          <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
         </Grid>
       </Grid>
       <Grid container spacing={2}>

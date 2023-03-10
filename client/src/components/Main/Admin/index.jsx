@@ -3,21 +3,17 @@ import { useState } from 'react';
 import { Button, Card, CardContent, Grid, TextField } from '@mui/material';
 
 import WorkflowButton from './WorkflowButton';
-import useEth from '../../../contexts/EthContext/useEth';
+
 import useEvents from '../../../hooks/useEvents';
 import useStatus from '../../../hooks/useStatus';
 
-export default function Admin() {
+export default function Admin({contract, accounts, web3}) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const status = useStatus();
   const events = useEvents('VoterRegistered');
-
-  const {
-    state: { contract, accounts, web3 }
-  } = useEth();
 
   async function addVoter() {
     if (web3.utils.isAddress(address)) {
@@ -47,7 +43,7 @@ export default function Admin() {
   }
 
   return (
-    <Card sx={{ height: 300, backgroundColor: '#e7ebf0' }}>
+    <Card sx={{ height: '100%', backgroundColor: '#e7ebf0' }}>
       <CardContent>
         <Grid
           height="100%"

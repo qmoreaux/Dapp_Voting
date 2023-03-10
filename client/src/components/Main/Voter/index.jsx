@@ -14,7 +14,7 @@ export default function Voter({ whitelist, contract, accounts }) {
 
   return (
     <>
-      <Card sx={{ height: 300, backgroundColor: '#e7ebf0' }}>
+      <Card sx={{ height: '100%', backgroundColor: '#e7ebf0' }}>
         <CardContent>
           {whitelist ? (
             <div>

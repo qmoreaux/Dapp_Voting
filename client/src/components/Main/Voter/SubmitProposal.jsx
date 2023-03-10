@@ -29,6 +29,7 @@ export default function SubmitProposal({contract, accounts}) {
             <Grid item display={'flex'} justifyContent={'center'}>
               <TextField
                 sx={{ mr: 1 }}
+                fullWidth
                 size="small"
                 label="Proposal description"
                 value={description}

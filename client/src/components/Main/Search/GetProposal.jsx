@@ -1,15 +1,10 @@
-import useEth from '../../../contexts/EthContext/useEth';
-
 import { useState } from 'react';
 
 import { Button, TextField } from '@mui/material';
 
-export default function GetProposal() {
+export default function GetProposal({contract, accounts}) {
   const [proposalID, setProposalID] = useState('');
   const [proposal, setProposal] = useState();
-  const {
-    state: { contract, accounts }
-  } = useEth();
 
   const handleInputChange = (e) => {
     if (/^\d+$|^$/.test(e.target.value)) {

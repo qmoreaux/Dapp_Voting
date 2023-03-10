@@ -1,17 +1,11 @@
-import useEth from '../../../contexts/EthContext/useEth';
-
 import { useState } from 'react';
 
 import { Button, TextField } from '@mui/material';
 
-export default function GetVoter() {
+export default function GetVoter({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [voter, setVoter] = useState('');
-
-  const {
-    state: { contract, accounts, web3 }
-  } = useEth();
 
   async function getVoter() {
     if (web3.utils.isAddress(address)) {
