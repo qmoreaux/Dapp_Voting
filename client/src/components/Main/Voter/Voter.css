@@ -1,16 +1,16 @@
 h3 {
   color: #444444;
   font-family: Roboto;
-  margin: 20px 0;
+  margin-top: 0px;
 }
 
-.search {
+.voter {
   flex-direction: column;
   justify-content: space-evenly !important;
   text-align: left !important;
 }
 
-.search .with-border {
+.voter .with-border {
   width: calc(100% - 80px);
   border: 1px solid #aaaaaa;
   border-radius: 10px;
@@ -18,7 +18,7 @@ h3 {
   margin: 10px 0;
 }
 
-.search .with-border label {
+.voter .with-border label {
   font-family: Roboto;
   font-size: 13px;
   font-weight: 500;

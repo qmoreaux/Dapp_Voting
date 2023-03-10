@@ -20,12 +20,19 @@ export default function GetVoter({ contract, accounts, web3 }) {
       setError(true);
     }
   }
+
+  function clearVoter() {
+    setAddress('');
+    setVoter('');
+  }
+
   return (
     <>
       <div className="with-border">
         <label>Get Voter</label>
         <div>
           <TextField
+            sx={{ mr: 2 }}
             size="small"
             error={error}
             id="outlined-error-helper-text"
@@ -37,9 +44,16 @@ export default function GetVoter({ contract, accounts, web3 }) {
               setAddress(event.target.value);
             }}
           />
-          <Button variant="contained" onClick={getVoter}>
+          <Button sx={{ mr: 2 }} variant="contained" onClick={getVoter}>
             Get
           </Button>
+          {voter ? (
+            <Button variant="contained" onClick={clearVoter}>
+              Clear
+            </Button>
+          ) : (
+            ''
+          )}
         </div>
         <div className="element-container">
           {voter ? (
