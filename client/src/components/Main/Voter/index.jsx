@@ -1,4 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+
+import useStatus from '../../../hooks/useStatus';
+
 import NotWhitelisted from '../NotWhitelisted';
 import SubmitProposal from './SubmitProposal';
 import SubmitVote from './SubmitVote';
@@ -6,19 +8,9 @@ import SubmitVote from './SubmitVote';
 import { Card, CardContent} from '@mui/material';
 
 
-export default function Voter({ whitelist, contract }) {
-  const [workflowStatus, setWorkflowStatus] = useState(0);
+export default function Voter({ whitelist, contract, accounts }) {
 
-  const getCurrentWorkflowStatus = useCallback(async () => {
-    const currentWorkflowStatus = await contract.methods.workflowStatus().call();
-    setWorkflowStatus(currentWorkflowStatus);
-  }, [contract]);
-
-  useEffect(() => {
-    if (contract) {
-      getCurrentWorkflowStatus();
-    }
-  }, [contract, getCurrentWorkflowStatus]);
+  const status = useStatus();
 
   return (
     <>
@@ -27,9 +19,9 @@ export default function Voter({ whitelist, contract }) {
           {whitelist ? (
             <div>
               You are whitelisted. Congrats !
-              {workflowStatus === 1 ? (
-                <SubmitProposal />
-              ) : workflowStatus === 3 ? (
+              {status === 1 ? (
+                <SubmitProposal contract={contract} accounts={accounts}/>
+              ) : status === 3 ? (
                 <SubmitVote />
               ) : (
                 'Nothing to do for now'

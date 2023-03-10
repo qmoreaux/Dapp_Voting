@@ -58,7 +58,7 @@ export default function Main() {
           <Admin />
         </Grid>
         <Grid item xs={4}>
-          <Voter whitelist={whitelist} contract={contract} />
+          <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
         </Grid>
         <Grid item xs={4}>
           <Search whitelist={whitelist} contract={contract} />
