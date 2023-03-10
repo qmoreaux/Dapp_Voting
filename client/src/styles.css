@@ -4,22 +4,6 @@
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.card-item {
-  background-color: #e7ebf0;
-  height: 100%;
-  min-height: 300px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.MuiCardContent-root {
-  height: 100%;
-  padding: 0 !important;
-}
-
 .MuiCardContent-root {
   height: 100%;
   padding: 0 !important;

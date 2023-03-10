@@ -3,6 +3,9 @@ import NotWhitelisted from '../NotWhitelisted';
 import SubmitProposal from './SubmitProposal';
 import SubmitVote from './SubmitVote';
 
+import { Card, CardContent} from '@mui/material';
+
+
 export default function Voter({ whitelist, contract }) {
   const [workflowStatus, setWorkflowStatus] = useState(0);
 
@@ -19,22 +22,24 @@ export default function Voter({ whitelist, contract }) {
 
   return (
     <>
-      <div className="card-item">
-        {whitelist ? (
-          <div>
-            You are whitelisted. Congrats !
-            {workflowStatus === 1 ? (
-              <SubmitProposal />
-            ) : workflowStatus === 3 ? (
-              <SubmitVote />
-            ) : (
-              'Nothing to do for now'
-            )}
-          </div>
-        ) : (
-          <NotWhitelisted />
-        )}
-      </div>
+      <Card sx={{ height: 300, backgroundColor: '#e7ebf0' }}>
+        <CardContent>
+          {whitelist ? (
+            <div>
+              You are whitelisted. Congrats !
+              {workflowStatus === 1 ? (
+                <SubmitProposal />
+              ) : workflowStatus === 3 ? (
+                <SubmitVote />
+              ) : (
+                'Nothing to do for now'
+              )}
+            </div>
+          ) : (
+            <NotWhitelisted />
+          )}
+        </CardContent>
+      </Card>
     </>
   );
 }

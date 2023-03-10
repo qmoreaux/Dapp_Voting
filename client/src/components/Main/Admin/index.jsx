@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { Button, Card, CardContent, Grid, TextField } from '@mui/material';
 
-import WorkflowButton from './WorkFlowButton';
+import WorkflowButton from './WorkflowButton';
 import useEth from '../../../contexts/EthContext/useEth';
-import useEvents from '../../../hooks/UseEvents';
+import useEvents from '../../../hooks/useEvents';
 import useStatus from '../../../hooks/useStatus';
 
 export default function Admin() {
