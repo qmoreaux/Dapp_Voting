@@ -10,3 +10,8 @@ La partie onlyVoters  + la recherche
 Déploiement + la vidéo
 
 https://mui.com/
+
+Utiliser le .call() avant le .send()
+Ajouter un dropdown avec les infos de l'utilisateur
+
+Gérer l'affichage des erreurs

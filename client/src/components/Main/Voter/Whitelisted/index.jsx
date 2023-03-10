@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 
-import SubmitProposal from './SubmitProposal';
-import SubmitVote from './SubmitVote';
+import SubmitProposal from '../SubmitProposal';
+import SubmitVote from '../SubmitVote.jsx';
 
 import useEth from '../../../../contexts/EthContext/useEth';
 

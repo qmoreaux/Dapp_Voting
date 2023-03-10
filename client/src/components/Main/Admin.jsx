@@ -26,7 +26,7 @@ export default function Admin() {
   }
   return (
     <>
-      <div className="card">
+      <div className="card-item">
         <TextField
           size="small"
           error={error}

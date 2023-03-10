@@ -27,22 +27,25 @@ export default function GetVoter() {
   }
   return (
     <>
-      <div className="card">
-        <TextField
-          size="small"
-          error={error}
-          id="outlined-error-helper-text"
-          label="Voter Address"
-          value={address}
-          helperText={error && 'Invalid address'}
-          onChange={(event) => {
-            setError(false);
-            setAddress(event.target.value);
-          }}
-        />
-        <Button variant="contained" onClick={getVoter}>
-          Get Voter
-        </Button>
+      <div className="with-border">
+        <label>Get Voter</label>
+        <div>
+          <TextField
+            size="small"
+            error={error}
+            id="outlined-error-helper-text"
+            label="Voter Address"
+            value={address}
+            helperText={error && 'Invalid address'}
+            onChange={(event) => {
+              setError(false);
+              setAddress(event.target.value);
+            }}
+          />
+          <Button variant="contained" onClick={getVoter}>
+            Get
+          </Button>
+        </div>
         {voter}
       </div>
     </>
