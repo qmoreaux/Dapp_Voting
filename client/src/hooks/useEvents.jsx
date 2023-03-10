@@ -29,15 +29,10 @@ export default function useEvents(eventName) {
 
   useEffect(() => {
     if (contract) {
-      getOldEvents();
-    }
-  }, [contract, getOldEvents]);
-
-  useEffect(() => {
-    if (contract) {
+      // getOldEvents();
       getEvents();
     }
-  }, [contract, getEvents]);
+  }, [contract, getOldEvents, getEvents]);
 
   return events;
 }
