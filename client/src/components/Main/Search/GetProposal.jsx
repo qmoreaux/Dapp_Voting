@@ -36,7 +36,7 @@ export default function GetProposal() {
             Get
           </Button>
         </div>
-        <div>{proposal}</div>
+        <div className="element-container">{proposal}</div>
       </div>
     </>
   );

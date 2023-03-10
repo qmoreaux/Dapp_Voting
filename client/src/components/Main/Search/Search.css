@@ -1,6 +1,7 @@
 h3 {
   color: #444444;
   font-family: Roboto;
+  margin-top: 20px;
 }
 
 .search {
@@ -10,9 +11,10 @@ h3 {
 
 .search .with-border {
   width: calc(100% - 80px);
-  border: 1px solid #444444;
+  border: 1px solid #aaaaaa;
   border-radius: 10px;
   padding: 20px;
+  margin: 10px 0;
 }
 
 .search .with-border label {
@@ -21,4 +23,29 @@ h3 {
   font-weight: 500;
   display: inline-block;
   margin-bottom: 10px;
+}
+
+.search .with-border .element-container {
+  min-height: 50px;
+}
+
+.search .with-border .element-container .element {
+  margin: 10px 0 0 10px;
+  font-family: Roboto;
+}
+
+.search .with-border .element-container .element:last-child {
+  margin-bottom: 0;
+}
+
+.search .with-border .element-container .element .element-label {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.search .with-border .element-container .element .element-value {
+  padding-left: 10px;
+  font-size: 12px;
 }
