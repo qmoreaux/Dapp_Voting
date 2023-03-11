@@ -30,9 +30,21 @@ export default function Admin({ contract, accounts, web3 }) {
   }
 
   async function handleWorkflow() {
+    let method;
+    if (status === 0) {
+      method = 'startProposalsRegistering';
+    } else if (status === 1) {
+      method = 'endProposalsRegistering';
+    } else if (status === 2) {
+      method = 'startVotingSession';
+    } else if (status === 3) {
+      method = 'endVotingSession';
+    } else if (status === 4) {
+      method = 'tallyVotes';
+    }
     setLoading(true);
     try {
-      await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
+      await contract.methods[method]().send({ from: accounts[0] });
       console.log('success');
     } catch (error) {
       console.log(error);
@@ -41,9 +53,18 @@ export default function Admin({ contract, accounts, web3 }) {
   }
 
   return (
-    <Card sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}>
+    <Card
+      sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}
+    >
       <CardContent>
-        <Grid height="100%" display={'flex'} flexDirection="column" justifyContent={'center'} container spacing={2}>
+        <Grid
+          height="100%"
+          display={'flex'}
+          flexDirection="column"
+          justifyContent={'center'}
+          container
+          spacing={2}
+        >
           {status === 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
               <TextField
@@ -67,7 +88,11 @@ export default function Admin({ contract, accounts, web3 }) {
           )}
           {events.length > 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
-              <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} />
+              <WorkflowButton
+                loading={loading}
+                status={status}
+                handleWorkflow={handleWorkflow}
+              />
             </Grid>
           )}
         </Grid>

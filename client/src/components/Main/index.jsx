@@ -17,6 +17,7 @@ export default function Main() {
   } = useEth();
 
   const [whitelist, setWhitelist] = useState(false);
+  const [owner, setOwner] = useState('');
 
   const getOldEvents = useCallback(async () => {
     let oldEvents = await contract.getPastEvents('VoterRegistered', {
@@ -43,25 +44,47 @@ export default function Main() {
       .on('connected', (str) => console.log(str));
   }, [contract, accounts]);
 
+  const getOwner = useCallback(async () => {
+    try {
+      let owner = await contract.methods.owner().call({ from: accounts[0] });
+      setOwner(owner);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [contract, accounts]);
+
   useEffect(() => {
     if (contract && accounts) {
       setWhitelist(false);
       getOldEvents();
       getNewEvents();
+      getOwner();
     }
-  }, [contract, accounts, getOldEvents, getNewEvents]);
+  }, [contract, accounts, getOldEvents, getNewEvents, getOwner]);
 
   return (
     <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 100 }}>
       <Grid container spacing={2}>
+        {accounts && accounts[0] === owner && (
+          <Grid item xs={4}>
+            <Admin contract={contract} accounts={accounts} web3={web3} />
+          </Grid>
+        )}
+
         <Grid item xs={4}>
-          <Admin contract={contract} accounts={accounts} web3={web3}/>
+          <Voter
+            whitelist={whitelist}
+            contract={contract}
+            accounts={accounts}
+          />
         </Grid>
         <Grid item xs={4}>
-          <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
-        </Grid>
-        <Grid item xs={4}>
-          <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
+          <Search
+            whitelist={whitelist}
+            contract={contract}
+            accounts={accounts}
+            web3={web3}
+          />
         </Grid>
       </Grid>
       <Grid container spacing={2}>

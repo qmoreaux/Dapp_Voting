@@ -13,8 +13,10 @@ export default function WorkflowButton({ loading, status, handleWorkflow }) {
         return 'Start voting sessing';
       case 3:
         return 'End voting sessing';
+      case 4:
+        return 'Tally votes';
       default:
-        return 'Not valid';
+        return 'Closed';
     }
   };
 
@@ -23,6 +25,7 @@ export default function WorkflowButton({ loading, status, handleWorkflow }) {
       loading={loading}
       variant="contained"
       onClick={handleWorkflow}
+      disabled={status === 5}
     >
       {getTitle()}
     </LoadingButton>
