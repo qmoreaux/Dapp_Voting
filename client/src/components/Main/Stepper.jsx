@@ -5,7 +5,9 @@ import useStatus from '../../hooks/useStatus';
 const steps = [
   'Voters Registration',
   'Proposals Registration',
+  'Proposals Registration ended',
   'Voting Session',
+  'Voting Session ended',
   'Votes Tallied'
 ];
 
