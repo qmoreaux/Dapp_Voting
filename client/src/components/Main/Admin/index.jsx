@@ -7,19 +7,24 @@ import WorkflowButton from './WorkflowButton';
 import useEvents from '../../../hooks/useEvents';
 import useStatus from '../../../hooks/useStatus';
 import useAlert from '../../../contexts/AlertContext/useAlert';
+import { useEffect } from 'react';
 
 export default function Admin({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const status = useStatus();
   const events = useEvents('VoterRegistered');
+  const proposalEvents = useEvents('ProposalRegistered');
+  const votedEvents = useEvents('Voted');
   const { addAlert } = useAlert();
 
   async function addVoter() {
     if (web3.utils.isAddress(address)) {
       try {
+        await contract.methods.addVoter(address).call({ from: accounts[0] });
         await contract.methods.addVoter(address).send({ from: accounts[0] });
         setAddress('');
         addAlert({
@@ -34,6 +39,18 @@ export default function Admin({ contract, accounts, web3 }) {
       setError(true);
     }
   }
+
+  useEffect(() => {
+    if (
+      (status === 1 && proposalEvents.length === 0) ||
+      (status === 3 && votedEvents.length === 0) ||
+      status === 5
+    ) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [status, proposalEvents, votedEvents]);
 
   async function handleWorkflow() {
     let method;
@@ -50,6 +67,7 @@ export default function Admin({ contract, accounts, web3 }) {
     }
     setLoading(true);
     try {
+      await contract.methods[method]().call({ from: accounts[0] });
       await contract.methods[method]().send({ from: accounts[0] });
       addAlert({
         message: 'Status has been changed !',
@@ -65,7 +83,14 @@ export default function Admin({ contract, accounts, web3 }) {
   return (
     <Card>
       <CardContent>
-        <Grid height="100%" display={'flex'} flexDirection="column" justifyContent={'center'} container spacing={2}>
+        <Grid
+          height="100%"
+          display={'flex'}
+          flexDirection="column"
+          justifyContent={'center'}
+          container
+          spacing={2}
+        >
           {status === 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
               <TextField
@@ -89,7 +114,12 @@ export default function Admin({ contract, accounts, web3 }) {
           )}
           {events.length > 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
-              <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} />
+              <WorkflowButton
+                loading={loading}
+                status={status}
+                handleWorkflow={handleWorkflow}
+                disabled={disabled}
+              />
             </Grid>
           )}
         </Grid>
