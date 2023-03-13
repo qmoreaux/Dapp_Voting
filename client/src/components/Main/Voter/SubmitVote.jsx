@@ -21,8 +21,12 @@ export default function SubmitVote({ contract, accounts }) {
   async function submitVote() {
     setLoading(true);
     try {
+      await contract.methods.setVote(vote).call({ from: accounts[0] });
       await contract.methods.setVote(vote).send({ from: accounts[0] });
-      addAlert({ message: `Vote submited for proposal : ${vote}`, severity: 'success' });
+      addAlert({
+        message: `Vote submited for proposal : ${vote}`,
+        severity: 'success'
+      });
       setVote('');
       setHasVoted(true);
     } catch (error) {
@@ -33,7 +37,9 @@ export default function SubmitVote({ contract, accounts }) {
   }
 
   async function checkHasVoted() {
-    const voter = await contract.methods.getVoter(accounts[0]).call({ from: accounts[0] });
+    const voter = await contract.methods
+      .getVoter(accounts[0])
+      .call({ from: accounts[0] });
     setHasVoted(voter.hasVoted);
   }
 
@@ -50,16 +56,30 @@ export default function SubmitVote({ contract, accounts }) {
         <FormControl fullWidth>
           <InputLabel id="vote-select-label">Vote</InputLabel>
 
-          <Select sx={{ mb: 2 }} labelId="vote-select-label" value={vote} label="Vote" onChange={handleChange}>
+          <Select
+            sx={{ mb: 2 }}
+            labelId="vote-select-label"
+            value={vote}
+            label="Vote"
+            onChange={handleChange}
+          >
             {events.map((event) => (
-              <MenuItem key={event.returnValues.proposalId} value={event.returnValues.proposalId}>
+              <MenuItem
+                key={event.returnValues.proposalId}
+                value={event.returnValues.proposalId}
+              >
                 {event.returnValues.proposalId}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
 
-        <LoadingButton loading={loading} variant="contained" onClick={submitVote} disabled={hasVoted || !vote}>
+        <LoadingButton
+          loading={loading}
+          variant="contained"
+          onClick={submitVote}
+          disabled={hasVoted || !vote}
+        >
           {hasVoted ? 'You have already voted' : 'Vote'}
         </LoadingButton>
       </Grid>
