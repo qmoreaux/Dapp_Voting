@@ -19,7 +19,7 @@ export default function Header() {
       const concatAddress = [
         ...address.splice(0, 4),
         '..............',
-        ...address.splice(address.length - 4, 3)
+        ...address.splice(address.length - 4, 4)
       ];
       setAddress(concatAddress.join(''));
     }
