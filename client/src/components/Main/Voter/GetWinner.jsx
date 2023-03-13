@@ -29,10 +29,10 @@ export default function SubmitProposal({ contract, accounts }) {
           Get Winner
         </Button>
         {proposalId && proposal ? (
-          <Typography>
-            Winning Proposal ID : {proposalId}
+          <Typography className="winning-proposal">
+            Winning Proposal ID : <b>{proposalId}</b>
             <br />
-            Winning Proposal Description : {proposal.description}
+            Winning Proposal Description : <b>{proposal.description}</b>
           </Typography>
         ) : (
           ''
