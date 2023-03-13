@@ -25,10 +25,10 @@ export default function useStatus() {
   }, [contract]);
 
   useEffect(() => {
-    if (contract) {
+    if (contract && accounts) {
       getStatus();
     }
-  }, [contract, getStatus, events]);
+  }, [contract, accounts, getStatus, events]);
 
   return status;
 }
