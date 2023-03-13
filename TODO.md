@@ -15,8 +15,6 @@ Tout mettre dans le fichier CSS
 
 ## Quentin
 
-Tout mettre dans le fichier CSS
-
 Demander à Cyril si pertinent de rajouter la description pour chaque proposal emit
 
 ## A faire demain
@@ -31,3 +29,5 @@ Rajouter un bouton Connect
 ## A discuter
 
 Ajouter l'owner à la whitelist au déploiement du contrat
+Bug on start
+Délai entre action et changement

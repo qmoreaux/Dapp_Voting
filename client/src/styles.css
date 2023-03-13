@@ -1,3 +1,5 @@
+/* Global */
+
 * {
   margin: 0;
   padding: 0;
@@ -35,6 +37,18 @@
   width: calc(100% - 40px);
 }
 
+/* Admin Component */
+
+.admin .MuiStack-root .MuiGrid-root {
+  flex-direction: row;
+}
+
+.admin .MuiTextField-root {
+  margin-right: 15px;
+}
+
+/* Voter Component */
+
 .voter .MuiInputBase-root {
   margin-bottom: 15px;
 }
@@ -46,11 +60,13 @@
 
 .voter .winning-proposal {
   margin-top: 15px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 10px;
   padding: 10px 20px;
   text-align: left;
 }
+
+/* Search Component */
 
 .search .stack-search {
   justify-content: flex-start;
@@ -59,10 +75,22 @@
   margin-bottom: 20px;
 }
 
+.search .stack-search > .MuiTypography-root {
+  margin-bottom: 10px;
+}
+
+.search .stack-search .MuiTextField-root {
+  margin-right: 15px;
+}
+
+.search .stack-search .MuiButton-root:first-of-type {
+  margin-right: 15px;
+}
+
 .search .stack-search .response-container {
   width: calc(100% - 40px);
   margin-top: 20px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 10px;
   padding: 10px 20px 0;
   align-items: flex-start;

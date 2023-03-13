@@ -48,8 +48,8 @@ export default function GetProposal({ contract, accounts }) {
     <Stack className="stack-search">
       <Typography>Get Proposal</Typography>
       <div>
-        <TextField sx={{ mr: 2 }} size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
-        <Button sx={{ mr: 2 }} variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
+        <TextField size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
+        <Button variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
           Get
         </Button>
         {proposal ? (

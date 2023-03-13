@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, Card, CardContent, Grid, TextField } from '@mui/material';
+import { Stack, Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material';
 
 import WorkflowButton from './WorkflowButton';
 
@@ -63,36 +63,38 @@ export default function Admin({ contract, accounts, web3 }) {
   }
 
   return (
-    <Card>
+    <Card className="admin">
       <CardContent>
-        <Grid height="100%" display={'flex'} flexDirection="column" justifyContent={'center'} container spacing={2}>
-          {status === 0 && (
-            <Grid item display={'flex'} justifyContent={'center'}>
-              <TextField
-                sx={{ mr: 1 }}
-                size="small"
-                error={error}
-                id="outlined-error-helper-text"
-                label="Voter Address"
-                value={address}
-                helperText={error && 'Invalid address'}
-                onChange={(event) => {
-                  setError(false);
-                  setAddress(event.target.value);
-                }}
-              />
+        <Stack>
+          <Typography variant="h6">Administration</Typography>
+          <Grid container spacing={2}>
+            {status === 0 && (
+              <Grid item>
+                <TextField
+                  size="small"
+                  error={error}
+                  id="outlined-error-helper-text"
+                  label="Voter Address"
+                  value={address}
+                  helperText={error && 'Invalid address'}
+                  onChange={(event) => {
+                    setError(false);
+                    setAddress(event.target.value);
+                  }}
+                />
 
-              <Button variant="contained" onClick={addVoter}>
-                Add
-              </Button>
-            </Grid>
-          )}
-          {events.length > 0 && (
-            <Grid item display={'flex'} justifyContent={'center'}>
-              <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} />
-            </Grid>
-          )}
-        </Grid>
+                <Button variant="contained" onClick={addVoter}>
+                  Add
+                </Button>
+              </Grid>
+            )}
+            {events.length > 0 && (
+              <Grid item display={'flex'} justifyContent={'center'}>
+                <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} />
+              </Grid>
+            )}
+          </Grid>
+        </Stack>
       </CardContent>
     </Card>
   );

@@ -39,7 +39,6 @@ export default function GetVoter({ contract, accounts, web3 }) {
       <Typography>Get Voter</Typography>
       <div>
         <TextField
-          sx={{ mr: 2 }}
           size="small"
           error={error}
           id="outlined-error-helper-text"
@@ -51,7 +50,7 @@ export default function GetVoter({ contract, accounts, web3 }) {
             setAddress(event.target.value);
           }}
         />
-        <Button sx={{ mr: 2 }} variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
+        <Button variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
           Get
         </Button>
         {voter ? (
