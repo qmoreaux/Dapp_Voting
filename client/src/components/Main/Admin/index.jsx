@@ -6,6 +6,7 @@ import WorkflowButton from './WorkflowButton';
 
 import useEvents from '../../../hooks/useEvents';
 import useStatus from '../../../hooks/useStatus';
+import useAlert from '../../../contexts/AlertContext/useAlert';
 
 export default function Admin({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
@@ -14,13 +15,17 @@ export default function Admin({ contract, accounts, web3 }) {
 
   const status = useStatus();
   const events = useEvents('VoterRegistered');
+  const { addAlert } = useAlert();
 
   async function addVoter() {
     if (web3.utils.isAddress(address)) {
       try {
         await contract.methods.addVoter(address).send({ from: accounts[0] });
         setAddress('');
-        console.log('success');
+        addAlert({
+          message: `Voter added : ${address}`,
+          severity: 'success'
+        });
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +50,10 @@ export default function Admin({ contract, accounts, web3 }) {
     setLoading(true);
     try {
       await contract.methods[method]().send({ from: accounts[0] });
-      console.log('success');
+      addAlert({
+        message: 'Status has been changed !',
+        severity: 'success'
+      });
     } catch (error) {
       console.log(error);
     }
