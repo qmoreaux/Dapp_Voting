@@ -1,3 +1,5 @@
+/* Global */
+
 * {
   margin: 0;
   padding: 0;
@@ -35,53 +37,73 @@
   width: calc(100% - 40px);
 }
 
-.MuiStack-root .MuiGrid-root .MuiTypography-root {
+/* Admin Component */
+
+.admin .MuiStack-root .MuiGrid-root {
+  flex-direction: row;
+}
+
+.admin .MuiTextField-root {
+  margin-right: 15px;
+}
+
+/* Voter Component */
+
+.voter .MuiInputBase-root {
+  margin-bottom: 15px;
+}
+
+.voter .MuiSelect-select {
   display: flex;
-  align-items: center;
-  flex-grow: 1;
+  align-items: flex-start;
 }
 
-.search {
-  flex-direction: column;
-  justify-content: space-evenly !important;
-  text-align: left !important;
-}
-
-.search .with-border {
-  width: calc(100% - 80px);
-  border: 1px solid #aaaaaa;
+.voter .winning-proposal {
+  margin-top: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 10px;
-  padding: 20px;
-  margin: 10px 0;
+  padding: 10px 20px;
+  text-align: left;
 }
 
-.search .with-border label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 500;
-  display: inline-block;
+/* Search Component */
+
+.search .stack-search {
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: calc(100% - 80px);
+  margin-bottom: 20px;
+}
+
+.search .stack-search > .MuiTypography-root {
   margin-bottom: 10px;
 }
 
-.search .with-border .element-container .element {
-  margin: 10px 0 0 10px;
-  font-family: Roboto;
+.search .stack-search .MuiTextField-root {
+  margin-right: 15px;
 }
 
-.search .with-border .element-container .element:last-child {
-  margin-bottom: 0;
+.search .stack-search .MuiButton-root:first-of-type {
+  margin-right: 15px;
 }
 
-.search .with-border .element-container .element .element-label {
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-  margin-bottom: 3px;
+.search .stack-search .response-container {
+  width: calc(100% - 40px);
+  margin-top: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 10px;
+  padding: 10px 20px 0;
+  align-items: flex-start;
 }
 
-.search .with-border .element-container .element .element-value {
-  padding-left: 10px;
-  font-size: 12px;
+.search .stack-search .response-container .label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.search .stack-search .response-container .value {
+  margin: 0 0 10px 15px;
+  font-size: 14px;
 }
 
 /* header */

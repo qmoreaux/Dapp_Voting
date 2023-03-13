@@ -57,7 +57,6 @@ export default function SubmitVote({ contract, accounts }) {
           <InputLabel id="vote-select-label">Vote</InputLabel>
 
           <Select
-            sx={{ mb: 2 }}
             labelId="vote-select-label"
             value={vote}
             label="Vote"
