@@ -8,19 +8,23 @@ export default function Events() {
       <Grid item xs={4}>
         <EventList
           title="Voters"
-          element="voterAddress"
+          elements={['voterAddress']}
           event="VoterRegistered"
         />
       </Grid>
       <Grid item xs={4}>
         <EventList
           title="Proposals"
-          element="proposalId"
+          elements={['proposalId']}
           event="ProposalRegistered"
         />
       </Grid>
       <Grid item xs={4}>
-        <EventList title="Votes" element="voter" event="Voted" />
+        <EventList
+          title="Votes"
+          elements={['proposalId', 'voter']}
+          event="Voted"
+        />
       </Grid>
     </Grid>
   );
