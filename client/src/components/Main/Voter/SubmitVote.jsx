@@ -7,7 +7,7 @@ import useAlert from '../../../contexts/AlertContext/useAlert';
 import useEvents from '../../../hooks/useEvents';
 
 export default function SubmitVote({ contract, accounts }) {
-  const [vote, setVote] = useState('');
+  const [vote, setVote] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
@@ -26,7 +26,7 @@ export default function SubmitVote({ contract, accounts }) {
       setVote('');
       setHasVoted(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
     setLoading(false);
@@ -34,7 +34,6 @@ export default function SubmitVote({ contract, accounts }) {
 
   async function checkHasVoted() {
     const voter = await contract.methods.getVoter(accounts[0]).call({ from: accounts[0] });
-    console.log(voter);
     setHasVoted(voter.hasVoted);
   }
 
@@ -42,6 +41,7 @@ export default function SubmitVote({ contract, accounts }) {
     if (contract && accounts) {
       checkHasVoted();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract, accounts]);
 
   return (
@@ -59,8 +59,8 @@ export default function SubmitVote({ contract, accounts }) {
           </Select>
         </FormControl>
 
-        <LoadingButton loading={loading} variant="contained" onClick={submitVote} disabled={hasVoted}>
-          {hasVoted ? 'You have already voted' : 'Submit'}
+        <LoadingButton loading={loading} variant="contained" onClick={submitVote} disabled={hasVoted || !vote}>
+          {hasVoted ? 'You have already voted' : 'Vote'}
         </LoadingButton>
       </Grid>
     </Grid>

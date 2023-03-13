@@ -13,11 +13,11 @@ export default function SubmitProposal({ contract, accounts }) {
   async function getWinner() {
     try {
       const _proposalId = await contract.methods.winningProposalID().call({ from: accounts[0] });
-      setProposalId(_proposalId);
       const _proposal = await contract.methods.getOneProposal(_proposalId).call({ from: accounts[0] });
+      setProposalId(_proposalId);
       setProposal(_proposal);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
   }

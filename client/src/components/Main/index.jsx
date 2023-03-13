@@ -10,11 +10,13 @@ import Events from './Events';
 import HorizontalStepper from './Stepper';
 
 import useEth from '../../contexts/EthContext/useEth';
+import useAlert from '../../contexts/AlertContext/useAlert';
 
 export default function Main() {
   const {
     state: { contract, accounts, web3 }
   } = useEth();
+  const { addAlert } = useAlert();
 
   const [whitelist, setWhitelist] = useState(false);
   const [owner, setOwner] = useState('');
@@ -49,7 +51,8 @@ export default function Main() {
       let owner = await contract.methods.owner().call({ from: accounts[0] });
       setOwner(owner);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      addAlert({ message: error.message, severity: 'error' });
     }
   }, [contract, accounts]);
 
@@ -72,19 +75,10 @@ export default function Main() {
         )}
 
         <Grid item xs={4}>
-          <Voter
-            whitelist={whitelist}
-            contract={contract}
-            accounts={accounts}
-          />
+          <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
         </Grid>
         <Grid item xs={4}>
-          <Search
-            whitelist={whitelist}
-            contract={contract}
-            accounts={accounts}
-            web3={web3}
-          />
+          <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
         </Grid>
       </Grid>
       <Grid container spacing={2}>

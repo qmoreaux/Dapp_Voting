@@ -27,7 +27,8 @@ export default function Admin({ contract, accounts, web3 }) {
           severity: 'success'
         });
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        addAlert({ message: error.message, severity: 'error' });
       }
     } else {
       setError(true);
@@ -55,24 +56,16 @@ export default function Admin({ contract, accounts, web3 }) {
         severity: 'success'
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      addAlert({ message: error.message, severity: 'error' });
     }
     setLoading(false);
   }
 
   return (
-    <Card
-      sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}
-    >
+    <Card sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}>
       <CardContent>
-        <Grid
-          height="100%"
-          display={'flex'}
-          flexDirection="column"
-          justifyContent={'center'}
-          container
-          spacing={2}
-        >
+        <Grid height="100%" display={'flex'} flexDirection="column" justifyContent={'center'} container spacing={2}>
           {status === 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
               <TextField
@@ -96,11 +89,7 @@ export default function Admin({ contract, accounts, web3 }) {
           )}
           {events.length > 0 && (
             <Grid item display={'flex'} justifyContent={'center'}>
-              <WorkflowButton
-                loading={loading}
-                status={status}
-                handleWorkflow={handleWorkflow}
-              />
+              <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} />
             </Grid>
           )}
         </Grid>

@@ -4,9 +4,13 @@ import { Button, TextField } from '@mui/material';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
+import useEvents from '../../../hooks/useEvents';
+
 export default function GetProposal({ contract, accounts }) {
   const [proposalID, setProposalID] = useState('');
   const [proposal, setProposal] = useState('');
+
+  const events = useEvents('ProposalRegistered');
 
   const { addAlert } = useAlert();
 
@@ -16,20 +20,29 @@ export default function GetProposal({ contract, accounts }) {
     }
   };
 
+  const isValidProposalId = () => {
+    return events.find((event) => {
+      if (event.returnValues.proposalId === proposalID) {
+        return true;
+      }
+      return false;
+    });
+  };
+
   async function getProposal() {
     try {
       const _proposal = await contract.methods.getOneProposal(proposalID).call({ from: accounts[0] });
       setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
   }
 
-  function clearProposal() {
+  const clearProposal = () => {
     setProposal('');
     setProposalID('');
-  }
+  };
 
   return (
     <>
@@ -37,7 +50,7 @@ export default function GetProposal({ contract, accounts }) {
         <label>Get Proposal</label>
         <div>
           <TextField sx={{ mr: 2 }} size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
-          <Button sx={{ mr: 2 }} variant="contained" onClick={getProposal}>
+          <Button sx={{ mr: 2 }} variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
             Get
           </Button>
           {proposal ? (

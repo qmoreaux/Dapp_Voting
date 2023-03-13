@@ -12,17 +12,21 @@ export default function GetVoter({ contract, accounts, web3 }) {
   const { addAlert } = useAlert();
 
   async function getVoter() {
-    if (web3.utils.isAddress(address)) {
+    if (isAddressValid()) {
       try {
         const _voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
         setVoter({ ..._voter, address: address });
       } catch (error) {
-        console.log(error);
+        console.error(error);
         addAlert({ message: error.message, severity: 'error' });
       }
     } else {
       setError(true);
     }
+  }
+
+  function isAddressValid() {
+    return web3.utils.isAddress(address);
   }
 
   function clearVoter() {
@@ -48,7 +52,7 @@ export default function GetVoter({ contract, accounts, web3 }) {
               setAddress(event.target.value);
             }}
           />
-          <Button sx={{ mr: 2 }} variant="contained" onClick={getVoter}>
+          <Button sx={{ mr: 2 }} variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
             Get
           </Button>
           {voter ? (

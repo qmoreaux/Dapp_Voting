@@ -18,7 +18,7 @@ export default function SubmitProposal({ contract, accounts }) {
       setDescription('');
       addAlert({ message: `Proposal added : ${description}`, severity: 'success' });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
     setLoading(false);
@@ -40,7 +40,7 @@ export default function SubmitProposal({ contract, accounts }) {
           }}
         />
 
-        <LoadingButton loading={loading} variant="contained" onClick={submitProposal}>
+        <LoadingButton loading={loading} disabled={!description.length} variant="contained" onClick={submitProposal}>
           Submit
         </LoadingButton>
       </Grid>
