@@ -10,9 +10,9 @@ export default function WorkflowButton({ loading, status, handleWorkflow }) {
       case 1:
         return 'End Proposal registering';
       case 2:
-        return 'Start voting sessing';
+        return 'Start voting session';
       case 3:
-        return 'End voting sessing';
+        return 'End voting session';
       case 4:
         return 'Tally votes';
       default:
@@ -21,12 +21,7 @@ export default function WorkflowButton({ loading, status, handleWorkflow }) {
   };
 
   return (
-    <LoadingButton
-      loading={loading}
-      variant="contained"
-      onClick={handleWorkflow}
-      disabled={status === 5}
-    >
+    <LoadingButton loading={loading} variant="contained" onClick={handleWorkflow} disabled={status === 5}>
       {getTitle()}
     </LoadingButton>
   );
