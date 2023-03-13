@@ -54,7 +54,7 @@ export default function Main() {
       console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
-  }, [contract, accounts]);
+  }, [contract, accounts, addAlert]);
 
   useEffect(() => {
     if (contract && accounts) {
@@ -75,10 +75,19 @@ export default function Main() {
         )}
 
         <Grid item xs={4}>
-          <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
+          <Voter
+            whitelist={whitelist}
+            contract={contract}
+            accounts={accounts}
+          />
         </Grid>
         <Grid item xs={4}>
-          <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
+          <Search
+            whitelist={whitelist}
+            contract={contract}
+            accounts={accounts}
+            web3={web3}
+          />
         </Grid>
       </Grid>
       <Grid container spacing={2}>
