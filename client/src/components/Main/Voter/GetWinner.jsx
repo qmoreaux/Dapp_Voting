@@ -23,10 +23,10 @@ export default function SubmitProposal({ contract, accounts }) {
   }
 
   return (
-    <Grid width="calc(100% - 80px)" display={'flex'} flexDirection="column" justifyContent={'center'} container>
-      <Grid item display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+    <Grid container>
+      <Grid item>
         <Button variant="contained" onClick={getWinner}>
-          GetWinner
+          Get Winner
         </Button>
         {proposalId && proposal ? (
           <div>

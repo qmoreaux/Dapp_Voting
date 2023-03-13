@@ -45,12 +45,12 @@ export default function SubmitVote({ contract, accounts }) {
   }, [contract, accounts]);
 
   return (
-    <Grid width="calc(100% - 80px)" display={'flex'} flexDirection="column" justifyContent={'center'} container>
-      <Grid item display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+    <Grid container>
+      <Grid item>
         <FormControl fullWidth>
           <InputLabel id="vote-select-label">Vote</InputLabel>
 
-          <Select labelId="vote-select-label" value={vote} label="Vote" onChange={handleChange}>
+          <Select sx={{ mb: 2 }} labelId="vote-select-label" value={vote} label="Vote" onChange={handleChange}>
             {events.map((event) => (
               <MenuItem key={event.returnValues.proposalId} value={event.returnValues.proposalId}>
                 {event.returnValues.proposalId}

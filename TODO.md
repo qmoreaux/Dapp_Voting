@@ -15,8 +15,6 @@ Tout mettre dans le fichier CSS
 
 ## Quentin
 
-Rajouter du texte quand il n'y a rien à faire
-
 Tout mettre dans le fichier CSS
 
 Demander à Cyril si pertinent de rajouter la description pour chaque proposal emit
@@ -30,6 +28,6 @@ Code review
 Ajouter un dropdown avec les infos de l'utilisateur
 Rajouter un bouton Connect
 
-## A discuter :
+## A discuter
 
 Ajouter l'owner à la whitelist au déploiement du contrat

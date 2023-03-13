@@ -5,9 +5,7 @@ import SubmitProposal from './SubmitProposal';
 import SubmitVote from './SubmitVote';
 import GetWinner from './GetWinner';
 
-import { Card, CardContent, Stack } from '@mui/material';
-
-import './Voter.css';
+import { Card, CardContent, Stack, Grid, Typography } from '@mui/material';
 
 export default function Voter({ whitelist, contract, accounts }) {
   const status = useStatus();
@@ -30,11 +28,11 @@ export default function Voter({ whitelist, contract, accounts }) {
 
   return (
     <>
-      <Card className="voter" sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}>
+      <Card className="voter">
         <CardContent>
           {whitelist ? (
-            <Stack height="100%" justifyContent="space-evenly" alignItems="center">
-              <h3>{getStatusTitle()}</h3>
+            <Stack>
+              <Typography variant="h6">{getStatusTitle()}</Typography>
               {status === 1 ? (
                 <SubmitProposal contract={contract} accounts={accounts} />
               ) : status === 3 ? (
@@ -42,11 +40,16 @@ export default function Voter({ whitelist, contract, accounts }) {
               ) : status === 5 ? (
                 <GetWinner contract={contract} accounts={accounts} />
               ) : (
-                'Nothing to do for now'
+                <Grid>
+                  <Typography>
+                    Nothing to do for now. <br />
+                    Please wait for the admin to advance to the next step.
+                  </Typography>
+                </Grid>
               )}
             </Stack>
           ) : (
-            <Stack height="100%" justifyContent="center" sx={{ textAlign: 'center' }}>
+            <Stack>
               <NotWhitelisted />
             </Stack>
           )}

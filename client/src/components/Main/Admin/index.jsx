@@ -63,7 +63,7 @@ export default function Admin({ contract, accounts, web3 }) {
   }
 
   return (
-    <Card sx={{ height: '100%', minHeight: '300px', backgroundColor: '#e7ebf0' }}>
+    <Card>
       <CardContent>
         <Grid height="100%" display={'flex'} flexDirection="column" justifyContent={'center'} container spacing={2}>
           {status === 0 && (
