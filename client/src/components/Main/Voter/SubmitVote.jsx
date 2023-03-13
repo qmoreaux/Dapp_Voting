@@ -50,7 +50,7 @@ export default function SubmitVote({ contract, accounts }) {
         <FormControl fullWidth>
           <InputLabel id="vote-select-label">Vote</InputLabel>
 
-          <Select sx={{ mb: 2 }} labelId="vote-select-label" value={vote} label="Vote" onChange={handleChange}>
+          <Select labelId="vote-select-label" value={vote} label="Vote" onChange={handleChange}>
             {events.map((event) => (
               <MenuItem key={event.returnValues.proposalId} value={event.returnValues.proposalId}>
                 {event.returnValues.proposalId}

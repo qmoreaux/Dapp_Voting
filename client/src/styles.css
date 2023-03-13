@@ -35,10 +35,8 @@
   width: calc(100% - 40px);
 }
 
-.MuiStack-root .MuiGrid-root .MuiTypography-root {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
+.voter .MuiInputBase-root {
+  margin-bottom: 15px;
 }
 
 .search {

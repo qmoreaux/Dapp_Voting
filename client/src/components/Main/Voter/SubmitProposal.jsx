@@ -28,7 +28,6 @@ export default function SubmitProposal({ contract, accounts }) {
     <Grid container>
       <Grid item>
         <TextField
-          sx={{ mb: 2 }}
           fullWidth
           multiline
           rows={4}

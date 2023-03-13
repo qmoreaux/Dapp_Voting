@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
@@ -29,11 +29,11 @@ export default function SubmitProposal({ contract, accounts }) {
           Get Winner
         </Button>
         {proposalId && proposal ? (
-          <div>
+          <Typography>
             Winning Proposal ID : {proposalId}
-            <br></br>
+            <br />
             Winning Proposal Description : {proposal.description}
-          </div>
+          </Typography>
         ) : (
           ''
         )}
