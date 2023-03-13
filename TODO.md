@@ -1,8 +1,9 @@
+## A répartir
+
 La vidéo de demo
 README
 
-Samir :
-
+## Samir
 
 Désactiver le bouton "End proposal submitting" tant qu'il n'y a pas au moins une proposition
 Désactiver le bouton "End voting session" tant qu'il n'y a pas au moins un vote
@@ -12,8 +13,7 @@ Utiliser le .call() avant le .send()
 
 Tout mettre dans le fichier CSS
 
-
-Quentin :
+## Quentin
 
 Rajouter du texte quand il n'y a rien à faire
 
@@ -21,12 +21,15 @@ Tout mettre dans le fichier CSS
 
 Demander à Cyril si pertinent de rajouter la description pour chaque proposal emit
 
-
-A faire demain :
+## A faire demain
 
 Code review
 
-Later (if possible) : 
+## Later (if possible)
 
 Ajouter un dropdown avec les infos de l'utilisateur
 Rajouter un bouton Connect
+
+## A discuter :
+
+Ajouter l'owner à la whitelist au déploiement du contrat
