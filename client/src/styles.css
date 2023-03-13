@@ -52,45 +52,28 @@
   text-align: left;
 }
 
-.search {
-  flex-direction: column;
-  justify-content: space-evenly !important;
-  text-align: left !important;
+.search .stack-search {
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: calc(100% - 80px);
+  margin-bottom: 20px;
 }
 
-.search .with-border {
-  width: calc(100% - 80px);
+.search .stack-search .response-container {
+  width: calc(100% - 40px);
+  margin-top: 20px;
   border: 1px solid #aaaaaa;
   border-radius: 10px;
-  padding: 20px;
-  margin: 10px 0;
+  padding: 10px 20px 0;
+  align-items: flex-start;
 }
 
-.search .with-border label {
-  font-family: Roboto;
-  font-size: 13px;
+.search .stack-search .response-container .label {
   font-weight: 500;
-  display: inline-block;
-  margin-bottom: 10px;
+  font-size: 14px;
 }
 
-.search .with-border .element-container .element {
-  margin: 10px 0 0 10px;
-  font-family: Roboto;
-}
-
-.search .with-border .element-container .element:last-child {
-  margin-bottom: 0;
-}
-
-.search .with-border .element-container .element .element-label {
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-  margin-bottom: 3px;
-}
-
-.search .with-border .element-container .element .element-value {
-  padding-left: 10px;
-  font-size: 12px;
+.search .stack-search .response-container .value {
+  margin: 0 0 10px 15px;
+  font-size: 14px;
 }

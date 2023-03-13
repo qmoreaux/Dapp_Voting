@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, TextField } from '@mui/material';
+import { Stack, Button, TextField, Typography } from '@mui/material';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
@@ -45,43 +45,33 @@ export default function GetProposal({ contract, accounts }) {
   };
 
   return (
-    <>
-      <div className="with-border">
-        <label>Get Proposal</label>
-        <div>
-          <TextField sx={{ mr: 2 }} size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
-          <Button sx={{ mr: 2 }} variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
-            Get
-          </Button>
-          {proposal ? (
-            <Button variant="contained" onClick={clearProposal}>
-              Clear
-            </Button>
-          ) : (
-            ''
-          )}
-        </div>
+    <Stack className="stack-search">
+      <Typography>Get Proposal</Typography>
+      <div>
+        <TextField sx={{ mr: 2 }} size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
+        <Button sx={{ mr: 2 }} variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
+          Get
+        </Button>
         {proposal ? (
-          <>
-            <div className="element-container">
-              <div className="element">
-                <div className="element-label">Proposal ID</div>
-                <div className="element-value"> {proposal.proposalID}</div>
-              </div>
-              <div className="element">
-                <div className="element-label">Description</div>
-                <div className="element-value"> {proposal.description}</div>
-              </div>
-              <div className="element">
-                <div className="element-label">Vote count</div>
-                <div className="element-value"> {proposal.voteCount}</div>
-              </div>
-            </div>
-          </>
+          <Button variant="contained" onClick={clearProposal}>
+            Clear
+          </Button>
         ) : (
           ''
         )}
       </div>
-    </>
+      {proposal ? (
+        <Stack className="response-container">
+          <Typography className="label">Proposal ID</Typography>
+          <Typography className="value"> {proposal.proposalID}</Typography>
+          <Typography className="label">Description</Typography>
+          <Typography className="value">{proposal.description}</Typography>
+          <Typography className="label">Vote count</Typography>
+          <Typography className="value">{proposal.voteCount}</Typography>
+        </Stack>
+      ) : (
+        ''
+      )}
+    </Stack>
   );
 }

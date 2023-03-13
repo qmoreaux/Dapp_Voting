@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, TextField } from '@mui/material';
+import { Stack, Button, TextField, Typography } from '@mui/material';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
@@ -35,54 +35,48 @@ export default function GetVoter({ contract, accounts, web3 }) {
   }
 
   return (
-    <>
-      <div className="with-border">
-        <label>Get Voter</label>
-        <div>
-          <TextField
-            sx={{ mr: 2 }}
-            size="small"
-            error={error}
-            id="outlined-error-helper-text"
-            label="Voter Address"
-            value={address}
-            helperText={error && 'Invalid address'}
-            onChange={(event) => {
-              setError(false);
-              setAddress(event.target.value);
-            }}
-          />
-          <Button sx={{ mr: 2 }} variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
-            Get
+    <Stack className="stack-search">
+      <Typography>Get Voter</Typography>
+      <div>
+        <TextField
+          sx={{ mr: 2 }}
+          size="small"
+          error={error}
+          id="outlined-error-helper-text"
+          label="Voter Address"
+          value={address}
+          helperText={error && 'Invalid address'}
+          onChange={(event) => {
+            setError(false);
+            setAddress(event.target.value);
+          }}
+        />
+        <Button sx={{ mr: 2 }} variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
+          Get
+        </Button>
+        {voter ? (
+          <Button variant="contained" onClick={clearVoter}>
+            Clear
           </Button>
-          {voter ? (
-            <Button variant="contained" onClick={clearVoter}>
-              Clear
-            </Button>
-          ) : (
-            ''
-          )}
-        </div>
-        <div className="element-container">
-          {voter ? (
+        ) : (
+          ''
+        )}
+      </div>
+      {voter ? (
+        <Stack className="response-container">
+          <Typography className="label">Address</Typography>
+          <Typography className="value"> {voter.address}</Typography>
+          <Typography className="label">Registered</Typography>
+          <Typography className="value">{voter.isRegistered ? 'Yes' : 'No'}</Typography>
+          {voter.isRegistered ? (
             <>
-              <div className="element">
-                <div className="element-label">Address</div>
-                <div className="element-value"> {voter.address}</div>
-              </div>
-              <div className="element">
-                <div className="element-label">Registered</div>
-                <div className="element-value"> {voter.isRegistered ? 'Yes' : 'No'}</div>
-              </div>
-              <div className="element">
-                <div className="element-label">Has voted</div>
-                <div className="element-value"> {voter.hasVoted ? 'Yes' : 'No'}</div>
-              </div>
+              <Typography className="label">Has voted</Typography>
+              <Typography className="value">{voter.hasVoted ? 'Yes' : 'No'}</Typography>
               {voter.hasVoted ? (
-                <div className="element">
-                  <div className="element-label">Voted proposal</div>
-                  <div className="element-value"> {voter.votedProposalId}</div>
-                </div>
+                <>
+                  <Typography className="label">Voted proposal</Typography>
+                  <Typography className="value">{voter.votedProposalId}</Typography>
+                </>
               ) : (
                 ''
               )}
@@ -90,8 +84,10 @@ export default function GetVoter({ contract, accounts, web3 }) {
           ) : (
             ''
           )}
-        </div>
-      </div>
-    </>
+        </Stack>
+      ) : (
+        ''
+      )}
+    </Stack>
   );
 }
