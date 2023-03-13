@@ -1,23 +1,14 @@
 import { useState } from 'react';
 
-import {
-  Stack,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  TextField,
-  Typography
-} from '@mui/material';
+import { Stack, Card, CardContent, Grid, Typography } from '@mui/material';
 
-import WorkflowButton from './WorkflowButton';
-
+import Owner from './Owner';
 import useEvents from '../../../hooks/useEvents';
 import useStatus from '../../../hooks/useStatus';
 import useAlert from '../../../contexts/AlertContext/useAlert';
 import { useEffect } from 'react';
 
-export default function Admin({ contract, accounts, web3 }) {
+export default function Admin({ contract, accounts, web3, owner }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -93,35 +84,21 @@ export default function Admin({ contract, accounts, web3 }) {
         <Stack>
           <Typography variant="h6">Administration</Typography>
           <Grid container spacing={2}>
-            {status === 0 && (
-              <Grid item>
-                <TextField
-                  size="small"
-                  error={error}
-                  id="outlined-error-helper-text"
-                  label="Voter Address"
-                  value={address}
-                  helperText={error && 'Invalid address'}
-                  onChange={(event) => {
-                    setError(false);
-                    setAddress(event.target.value);
-                  }}
-                />
-
-                <Button variant="contained" onClick={addVoter}>
-                  Add
-                </Button>
-              </Grid>
-            )}
-            {events.length > 0 && (
-              <Grid item display={'flex'} justifyContent={'center'}>
-                <WorkflowButton
-                  loading={loading}
-                  status={status}
-                  handleWorkflow={handleWorkflow}
-                  disabled={disabled}
-                />
-              </Grid>
+            {owner ? (
+              <Owner
+                handleWorkflow={handleWorkflow}
+                error={error}
+                address={address}
+                setError={setError}
+                setAddress={setAddress}
+                addVoter={addVoter}
+                status={status}
+                events={events}
+                loading={loading}
+                disabled={disabled}
+              />
+            ) : (
+              <Typography>Don't have access</Typography>
             )}
           </Grid>
         </Stack>

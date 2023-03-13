@@ -68,12 +68,14 @@ export default function Main() {
   return (
     <Container maxWidth="xl" className="container-main">
       <Grid container spacing={2}>
-        {accounts && accounts[0] === owner && (
-          <Grid item xs={4}>
-            <Admin contract={contract} accounts={accounts} web3={web3} />
-          </Grid>
-        )}
-
+        <Grid item xs={4}>
+          <Admin
+            contract={contract}
+            accounts={accounts}
+            web3={web3}
+            owner={accounts && accounts[0] === owner}
+          />
+        </Grid>
         <Grid item xs={4}>
           <Voter
             whitelist={whitelist}
