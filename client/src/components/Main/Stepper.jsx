@@ -15,7 +15,7 @@ export default function HorizontalStepper() {
   const status = useStatus();
 
   return (
-    <Box sx={{ width: '100%', mt: 6 }}>
+    <Box className="stepper">
       <Stepper activeStep={status} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>

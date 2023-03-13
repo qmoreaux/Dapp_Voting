@@ -83,3 +83,30 @@
   padding-left: 10px;
   font-size: 12px;
 }
+
+/* header */
+.header-logo {
+  flex-grow: 1;
+}
+
+/* footer */
+.footer {
+  top: auto !important;
+  bottom: 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+/* main */
+.container-main {
+  margin: 100px 0;
+}
+
+/* stepper */
+.stepper {
+  margin-top: 4rem;
+}

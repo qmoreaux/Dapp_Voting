@@ -66,7 +66,7 @@ export default function Main() {
   }, [contract, accounts, getOldEvents, getNewEvents, getOwner]);
 
   return (
-    <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 100 }}>
+    <Container maxWidth="xl" className="container-main">
       <Grid container spacing={2}>
         {accounts && accounts[0] === owner && (
           <Grid item xs={4}>
