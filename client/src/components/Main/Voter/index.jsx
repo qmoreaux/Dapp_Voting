@@ -3,6 +3,7 @@ import useStatus from '../../../hooks/useStatus';
 import NotWhitelisted from '../NotWhitelisted';
 import SubmitProposal from './SubmitProposal';
 import SubmitVote from './SubmitVote';
+import GetWinner from './GetWinner';
 
 import { Card, CardContent, Stack } from '@mui/material';
 
@@ -37,7 +38,9 @@ export default function Voter({ whitelist, contract, accounts }) {
               {status === 1 ? (
                 <SubmitProposal contract={contract} accounts={accounts} />
               ) : status === 3 ? (
-                <SubmitVote />
+                <SubmitVote contract={contract} accounts={accounts} />
+              ) : status === 5 ? (
+                <GetWinner contract={contract} accounts={accounts} />
               ) : (
                 'Nothing to do for now'
               )}

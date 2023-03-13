@@ -19,7 +19,7 @@ export default function GetProposal({ contract, accounts }) {
   async function getProposal() {
     try {
       const _proposal = await contract.methods.getOneProposal(proposalID).call({ from: accounts[0] });
-      setProposal(_proposal);
+      setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
       console.log(error);
       addAlert({ message: error.message, severity: 'error' });
@@ -53,7 +53,7 @@ export default function GetProposal({ contract, accounts }) {
             <div className="element-container">
               <div className="element">
                 <div className="element-label">Proposal ID</div>
-                <div className="element-value"> {proposalID}</div>
+                <div className="element-value"> {proposal.proposalID}</div>
               </div>
               <div className="element">
                 <div className="element-label">Description</div>

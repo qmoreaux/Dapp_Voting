@@ -1,15 +1,18 @@
 import { useState } from 'react';
 
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
 export default function SubmitProposal({ contract, accounts }) {
   const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const { addAlert } = useAlert();
 
   async function submitProposal() {
+    setLoading(true);
     try {
       await contract.methods.addProposal(description).send({ from: accounts[0] });
       setDescription('');
@@ -18,6 +21,7 @@ export default function SubmitProposal({ contract, accounts }) {
       console.log(error);
       addAlert({ message: error.message, severity: 'error' });
     }
+    setLoading(false);
   }
 
   return (
@@ -36,9 +40,9 @@ export default function SubmitProposal({ contract, accounts }) {
           }}
         />
 
-        <Button variant="contained" onClick={submitProposal}>
+        <LoadingButton loading={loading} variant="contained" onClick={submitProposal}>
           Submit
-        </Button>
+        </LoadingButton>
       </Grid>
     </Grid>
   );

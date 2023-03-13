@@ -15,7 +15,7 @@ export default function GetVoter({ contract, accounts, web3 }) {
     if (web3.utils.isAddress(address)) {
       try {
         const _voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
-        setVoter(_voter);
+        setVoter({ ..._voter, address: address });
       } catch (error) {
         console.log(error);
         addAlert({ message: error.message, severity: 'error' });
@@ -64,7 +64,7 @@ export default function GetVoter({ contract, accounts, web3 }) {
             <>
               <div className="element">
                 <div className="element-label">Address</div>
-                <div className="element-value"> {address}</div>
+                <div className="element-value"> {voter.address}</div>
               </div>
               <div className="element">
                 <div className="element-label">Registered</div>
