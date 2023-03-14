@@ -67,28 +67,14 @@ export default function Main() {
   return (
     <Container maxWidth="xl" className="container-main">
       <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <Admin
-            contract={contract}
-            accounts={accounts}
-            web3={web3}
-            owner={accounts && accounts[0] === owner}
-          />
+        <Grid item xs={12} md={6} lg={4}>
+          <Admin contract={contract} accounts={accounts} web3={web3} owner={accounts && accounts[0] === owner} />
         </Grid>
-        <Grid item xs={4}>
-          <Voter
-            whitelist={whitelist}
-            contract={contract}
-            accounts={accounts}
-          />
+        <Grid item xs={12} md={6} lg={4}>
+          <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
         </Grid>
-        <Grid item xs={4}>
-          <Search
-            whitelist={whitelist}
-            contract={contract}
-            accounts={accounts}
-            web3={web3}
-          />
+        <Grid item xs={12} md={6} lg={4}>
+          <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
         </Grid>
       </Grid>
       <Grid container spacing={2}>
