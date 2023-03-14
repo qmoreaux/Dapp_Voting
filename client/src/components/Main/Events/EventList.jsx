@@ -1,10 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 
-import useEvents from '../../../hooks/useEvents';
-
-export default function EventList({ title, elements, event }) {
-  const events = useEvents(event);
-
+export default function EventList({ title, elements, events }) {
   return (
     <Stack>
       <Typography variant="h6">{title}</Typography>

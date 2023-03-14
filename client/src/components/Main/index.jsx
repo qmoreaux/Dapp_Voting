@@ -1,5 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
@@ -10,71 +9,62 @@ import Events from './Events';
 import HorizontalStepper from './Stepper';
 
 import useEth from '../../contexts/EthContext/useEth';
-import useAlert from '../../contexts/AlertContext/useAlert';
-
+import useOwner from '../../hooks/useOwner';
+import useEvents from '../../hooks/useEvents';
+import useStatus from '../../hooks/useStatus';
 export default function Main() {
   const {
     state: { contract, accounts, web3 }
   } = useEth();
-  const { addAlert } = useAlert();
+  const registeredEvents = useEvents('VoterRegistered');
+  const proposalEvents = useEvents('ProposalRegistered');
+  const votedEvents = useEvents('Voted');
+  const owner = useOwner();
+  const status = useStatus();
 
   const [whitelist, setWhitelist] = useState(false);
-  const [owner, setOwner] = useState('');
 
-  const getOldEvents = useCallback(async () => {
-    let oldEvents = await contract.getPastEvents('VoterRegistered', {
-      fromBlock: 0,
-      toBlock: 'latest'
-    });
-    oldEvents.forEach((event) => {
+  useEffect(() => {
+    registeredEvents.forEach((event) => {
       if (event.returnValues.voterAddress === accounts[0]) {
         setWhitelist(true);
       }
     });
-  }, [contract, accounts]);
-
-  const getNewEvents = useCallback(async () => {
-    await contract.events
-      .VoterRegistered({ fromBlock: 'earliest' })
-      .on('data', (event) => {
-        if (event.returnValues.voterAddress === accounts[0]) {
-          setWhitelist(true);
-        }
-      })
-      .on('changed', (changed) => console.log(changed))
-      .on('error', (err) => console.log(err))
-      .on('connected', (str) => console.log(str));
-  }, [contract, accounts]);
-
-  const getOwner = useCallback(async () => {
-    try {
-      let owner = await contract.methods.owner().call({ from: accounts[0] });
-      setOwner(owner);
-    } catch (error) {
-      addAlert({ message: error.message, severity: 'error' });
-    }
-  }, [contract, accounts, addAlert]);
+  }, [accounts, registeredEvents]);
 
   useEffect(() => {
     if (contract && accounts) {
       setWhitelist(false);
-      getOldEvents();
-      getNewEvents();
-      getOwner();
     }
-  }, [contract, accounts, getOldEvents, getNewEvents, getOwner]);
+  }, [contract, accounts]);
 
   return (
     <Container maxWidth="xl" className="container-main">
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={4}>
-          <Admin contract={contract} accounts={accounts} web3={web3} owner={accounts && accounts[0] === owner} />
+          <Admin
+            contract={contract}
+            accounts={accounts}
+            web3={web3}
+            owner={accounts && accounts[0] === owner}
+            status={status}
+          />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <Voter whitelist={whitelist} contract={contract} accounts={accounts} />
+          <Voter
+            whitelist={whitelist}
+            contract={contract}
+            accounts={accounts}
+            status={status}
+          />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
+          <Search
+            whitelist={whitelist}
+            contract={contract}
+            accounts={accounts}
+            web3={web3}
+          />
         </Grid>
       </Grid>
       <Grid container spacing={2}>
@@ -82,7 +72,11 @@ export default function Main() {
           <HorizontalStepper />
         </Grid>
         <Grid item xs={12}>
-          <Events />
+          <Events
+            registeredEvents={registeredEvents}
+            proposalEvents={proposalEvents}
+            votedEvents={votedEvents}
+          />
         </Grid>
       </Grid>
     </Container>

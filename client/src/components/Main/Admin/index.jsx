@@ -1,20 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Stack, Card, CardContent, Grid, Typography } from '@mui/material';
 
 import Owner from './Owner';
 import useEvents from '../../../hooks/useEvents';
-import useStatus from '../../../hooks/useStatus';
 import useAlert from '../../../contexts/AlertContext/useAlert';
-import { useEffect } from 'react';
 
-export default function Admin({ contract, accounts, web3, owner }) {
+export default function Admin({ contract, accounts, web3, owner, status }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const status = useStatus();
   const events = useEvents('VoterRegistered');
   const proposalEvents = useEvents('ProposalRegistered');
   const votedEvents = useEvents('Voted');
@@ -31,7 +28,6 @@ export default function Admin({ contract, accounts, web3, owner }) {
           severity: 'success'
         });
       } catch (error) {
-        console.error(error);
         addAlert({ message: error.message, severity: 'error' });
       }
     } else {

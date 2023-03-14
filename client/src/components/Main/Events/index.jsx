@@ -2,7 +2,11 @@ import { Card, CardContent, Grid, Typography } from '@mui/material';
 
 import EventList from './EventList';
 
-export default function Events() {
+export default function Events({
+  registeredEvents,
+  proposalEvents,
+  votedEvents
+}) {
   return (
     <Card className="events">
       <CardContent>
@@ -12,21 +16,21 @@ export default function Events() {
             <EventList
               title="Voters"
               elements={['voterAddress']}
-              event="VoterRegistered"
+              events={registeredEvents}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <EventList
               title="Proposals"
               elements={['proposalId']}
-              event="ProposalRegistered"
+              events={proposalEvents}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <EventList
               title="Votes"
               elements={['proposalId', 'voter']}
-              event="Voted"
+              events={votedEvents}
             />
           </Grid>
         </Grid>
