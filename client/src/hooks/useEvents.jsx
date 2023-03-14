@@ -10,7 +10,7 @@ export default function useEvents(eventName) {
 
   const getOldEvents = useCallback(async () => {
     let oldEvents = await contract.getPastEvents(eventName, {
-      fromBlock: 0,
+      fromBlock: 'earliest',
       toBlock: 'latest'
     });
     setEvents(oldEvents);
@@ -37,7 +37,8 @@ export default function useEvents(eventName) {
     if (contract) {
       getEvents();
     }
-  }, [contract, getEvents]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return events;
 }

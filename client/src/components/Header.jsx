@@ -1,29 +1,28 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
   const {
-    state: { accounts }
+    state: { accounts },
+    tryInit
   } = useEth();
   const [address, setAddress] = useState('');
 
   useEffect(() => {
     if (accounts) {
-      let address = accounts[0].split('');
+      let _address = accounts[0];
 
-      const concatAddress = [
-        ...address.splice(0, 4),
-        '..............',
-        ...address.splice(address.length - 4, 4)
-      ];
-      setAddress(concatAddress.join(''));
+      setAddress(_address.substring(0, 5) + '...' + _address.substring(_address.length - 4));
     }
   }, [accounts]);
+
+  useEffect(() => {
+    if (window.ethereum && window.ethereum.isConnected()) {
+      tryInit();
+    }
+  });
 
   return (
     <Box>
@@ -32,7 +31,7 @@ export default function Header() {
           <Box component="div" sx={{ flexGrow: 1 }}>
             <img src="/logo.png" alt="logo" />
           </Box>
-          <Typography>{address}</Typography>
+          {address ? <Typography>{address}</Typography> : <Button onClick={tryInit}>Connect</Button>}
         </Toolbar>
       </AppBar>
     </Box>
