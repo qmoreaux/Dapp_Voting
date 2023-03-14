@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import useEvents from '../../../hooks/useEvents';
 
@@ -6,7 +6,7 @@ export default function EventList({ title, elements, event }) {
   const events = useEvents(event);
 
   return (
-    <>
+    <Stack>
       <Typography variant="h6">{title}</Typography>
 
       {events.map((event) => (
@@ -18,6 +18,6 @@ export default function EventList({ title, elements, event }) {
           ))}
         </Typography>
       ))}
-    </>
+    </Stack>
   );
 }
