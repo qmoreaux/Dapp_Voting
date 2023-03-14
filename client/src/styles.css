@@ -137,4 +137,10 @@
 
 .events .MuiTypography-h6 {
   text-align: center;
+  margin: 0 auto;
+}
+
+.events .MuiStack-root {
+  align-items: flex-start;
+  padding: 1rem;
 }
