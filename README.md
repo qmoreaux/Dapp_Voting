@@ -1,39 +1,33 @@
-# React Truffle Box
+# Voting Dapp
 
-This box comes with everything you need to start using Truffle to write, compile, test, and deploy smart contracts, and interact with them from a React app.
+This project implements the frontend for the Voting smart contract that was created during Project 1. It is based on `truffle react box`.
 
-## Installation
+## Deployement
 
-First ensure you are in an empty directory.
+The deployement script automatically add the owner of the smart contract to the whitelist.
 
-Run the `unbox` command using 1 of 2 ways.
+## Modeling
 
-```sh
-# Install Truffle globally and run `truffle unbox`
-$ npm install -g truffle
-$ truffle unbox react
-```
+The following model was created at the start of the project.
+Some things might have changed during the implementation :
 
-```sh
-# Alternatively, run `truffle unbox` via npx
-$ npx truffle unbox react
-```
+![Modeling Dapp](https://github.com/qmoreaux/Dapp_Voting/blob/main/dapp-voting-schema.png?raw=true)
 
-Start the react dev server.
+## Work repartition
 
-```sh
-$ cd client
-$ npm start
-```
+### Samir
 
-From there, follow the instructions on the hosted React app. It will walk you through using Truffle and Ganache to deploy the `SimpleStorage` contract, making calls to it, and sending transactions to change the contract's state.
+- Implemented the global structure of the application
+- Implemented the `Admin` and `Events` components of the project
+- Implemented a global context `AppContext` to make some elements easily reusable (`events`, `status`, `owner`, `whitelist`)
+-
 
-## FAQ
+### Quentin
 
-- __How do I use this with Ganache (or any other network)?__
+- Created the first version of the model
+- Updated the contract to add natspec comments and fix security issue
+- Implemented the `Main` and `Search` components of the project
 
-  The Truffle project is set to deploy to Ganache by default. If you'd like to change this, it's as easy as modifying the Truffle config file! Check out [our documentation on adding network configurations](https://trufflesuite.com/docs/truffle/reference/configuration/#networks). From there, you can run `truffle migrate` pointed to another network, restart the React dev server, and see the change take place.
+## Demo video
 
-- __Where can I find more resources?__
-
-  This Box is a sweet combo of [Truffle](https://trufflesuite.com) and [Webpack](https://webpack.js.org). Either one would be a great place to start!
+**To add**

@@ -10,7 +10,6 @@ Créer un AppProvider et regrouper à l'intérieur events, status, alert, owner 
 ## Quentin
 
 Demander à Cyril si pertinent de rajouter la description pour chaque proposal emit
-README
 
 ### A regarder
 
