@@ -51,7 +51,6 @@ export default function Main() {
       let owner = await contract.methods.owner().call({ from: accounts[0] });
       setOwner(owner);
     } catch (error) {
-      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
   }, [contract, accounts, addAlert]);
