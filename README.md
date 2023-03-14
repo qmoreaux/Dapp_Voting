@@ -11,7 +11,7 @@ The deployement script automatically add the owner of the smart contract to the 
 The following model was created at the start of the project.
 Some things might have changed during the implementation :
 
-![Modeling Dapp](https://github.com/qmoreaux/Dapp_Voting/blob/main/dapp-voting-schema.png?raw=true)
+![Modeling Dapp](./dapp-voting-schema.png?raw=true)
 
 ## Work repartition
 
@@ -31,3 +31,13 @@ Some things might have changed during the implementation :
 ## Demo video
 
 **To add**
+
+## FAQ
+
+- __How to use ?__
+
+  TODO
+
+- __To add__
+
+  TODO
