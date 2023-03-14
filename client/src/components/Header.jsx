@@ -22,7 +22,8 @@ export default function Header() {
     if (window.ethereum && window.ethereum.isConnected()) {
       tryInit();
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box>
@@ -31,7 +32,11 @@ export default function Header() {
           <Box component="div" sx={{ flexGrow: 1 }}>
             <img src="/logo.png" alt="logo" />
           </Box>
-          {address ? <Typography>{address}</Typography> : <Button onClick={tryInit}>Connect</Button>}
+          {address ? (
+            <Typography>{address}</Typography>
+          ) : (
+            <>{window.ethereum ? <Button onClick={tryInit}>Connect</Button> : ''}</>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

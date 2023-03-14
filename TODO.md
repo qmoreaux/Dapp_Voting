@@ -21,5 +21,5 @@ Code review
 ## A discuter
 
 Bug on start
-Revoir les events
+Revoir les events (Bug parce que useEvents est importé à de multiple endroits)
 Délai entre action et changement
