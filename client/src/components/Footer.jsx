@@ -9,7 +9,9 @@ export default function Footer() {
     <AppBar position="fixed" color="primary" className="footer">
       <Toolbar>
         <Box className="footer-content">
-          <Typography>Made by Quentin and Samir for Alyra</Typography>
+          <Typography variant="body2">
+            Made by Quentin and Samir for Alyra
+          </Typography>
         </Box>
       </Toolbar>
     </AppBar>

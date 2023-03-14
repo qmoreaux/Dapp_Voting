@@ -29,9 +29,9 @@ export default function Header() {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" className="header-logo">
-            Projet3
-          </Typography>
+          <Box component="div" sx={{ flexGrow: 1 }}>
+            <img src="/logo.png" alt="logo" />
+          </Box>
           <Typography>{address}</Typography>
         </Toolbar>
       </AppBar>

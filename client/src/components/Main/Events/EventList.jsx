@@ -4,7 +4,6 @@ export default function EventList({ title, elements, events }) {
   return (
     <Stack>
       <Typography variant="h6">{title}</Typography>
-
       {events.map((event) => (
         <Typography key={event.id}>
           {elements.map((elt) => (
