@@ -20,11 +20,12 @@ export default function useEvents(eventName) {
   const getEvents = useCallback(async () => {
     await contract.events[eventName]({ fromBlock: 'earliest' })
       .on('data', (event) => {
+        console.log(`New event of type ${eventName} received : ${JSON.stringify(event)}`);
         setEvents([...events, event]);
       })
-      .on('changed', (changed) => console.log(changed))
-      .on('error', (err) => console.log(err))
-      .on('connected', (str) => console.log(str));
+      .on('changed', (changed) => console.log(`Event ${eventName} changed: ${changed}`))
+      .on('error', (err) => console.error(`Error with event ${eventName}: ${err}`))
+      .on('connected', (str) => console.log(`Connected to ${eventName}: ${str}`));
   }, [contract, events, eventName]);
 
   useEffect(() => {
