@@ -32,12 +32,6 @@ Some things might have changed during the implementation :
 
 **To add**
 
-## FAQ
+## Public access
 
-- __How to use ?__
-
-  TODO
-
-- __To add__
-
-  TODO
+The DApp is available at the following address : [https://dapp-voting-delta.vercel.app/](https://dapp-voting-delta.vercel.app/)
