@@ -34,4 +34,6 @@ Some things might have changed during the implementation :
 
 ## Public access
 
-The DApp is available at the following address : [https://dapp-voting-delta.vercel.app/](https://dapp-voting-delta.vercel.app/)
+- The Smart Contract is deployed on Goerli at the following address [0xfd81505A66f3F55Fe3d82e997729FfA0337F5B13](https://goerli.etherscan.io/address/0xfd81505A66f3F55Fe3d82e997729FfA0337F5B13)
+
+- The DApp is available at the following address : [https://dapp-voting-delta.vercel.app/](https://dapp-voting-delta.vercel.app/)
