@@ -4,13 +4,11 @@ import { Stack, Button, TextField, Typography } from '@mui/material';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
-import useEvents from '../../../hooks/useEvents';
-
 export default function GetProposal({ contract, accounts }) {
   const [proposalID, setProposalID] = useState('');
   const [proposal, setProposal] = useState('');
 
-  const events = useEvents('ProposalRegistered');
+  const events = [];
 
   const { addAlert } = useAlert();
 
@@ -31,7 +29,9 @@ export default function GetProposal({ contract, accounts }) {
 
   async function getProposal() {
     try {
-      const _proposal = await contract.methods.getOneProposal(proposalID).call({ from: accounts[0] });
+      const _proposal = await contract.methods
+        .getOneProposal(proposalID)
+        .call({ from: accounts[0] });
       setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
       console.error(error);
@@ -48,8 +48,17 @@ export default function GetProposal({ contract, accounts }) {
     <Stack className="stack-search">
       <Typography>Get Proposal</Typography>
       <div>
-        <TextField size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
-        <Button variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
+        <TextField
+          size="small"
+          label="Proposal ID"
+          value={proposalID}
+          onChange={handleInputChange}
+        />
+        <Button
+          variant="contained"
+          onClick={getProposal}
+          disabled={!isValidProposalId()}
+        >
           Get
         </Button>
         {proposal ? (

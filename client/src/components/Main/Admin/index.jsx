@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Stack, Card, CardContent, Grid, Typography } from '@mui/material';
 
 import Owner from './Owner';
-import useEvents from '../../../hooks/useEvents';
 import useAlert from '../../../contexts/AlertContext/useAlert';
 
 export default function Admin({ contract, accounts, web3, owner, status }) {
@@ -12,9 +11,9 @@ export default function Admin({ contract, accounts, web3, owner, status }) {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const events = useEvents('VoterRegistered');
-  const proposalEvents = useEvents('ProposalRegistered');
-  const votedEvents = useEvents('Voted');
+  const events = [];
+  const proposalEvents = [];
+  const votedEvents = [];
   const { addAlert } = useAlert();
 
   async function addVoter() {
