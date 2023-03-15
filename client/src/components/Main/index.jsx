@@ -10,15 +10,14 @@ import HorizontalStepper from './Stepper';
 
 import useEth from '../../contexts/EthContext/useEth';
 import useOwner from '../../hooks/useOwner';
-import useEvents from '../../hooks/useEvents';
 import useStatus from '../../hooks/useStatus';
 export default function Main() {
   const {
     state: { contract, accounts, web3 }
   } = useEth();
-  const registeredEvents = useEvents('VoterRegistered');
-  const proposalEvents = useEvents('ProposalRegistered');
-  const votedEvents = useEvents('Voted');
+  const registeredEvents = [];
+  const proposalEvents = [];
+  const votedEvents = [];
   const owner = useOwner();
   const status = useStatus();
 
@@ -62,10 +61,20 @@ export default function Main() {
                   />
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
-                  <Voter whitelist={whitelist} contract={contract} accounts={accounts} status={status} />
+                  <Voter
+                    whitelist={whitelist}
+                    contract={contract}
+                    accounts={accounts}
+                    status={status}
+                  />
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
-                  <Search whitelist={whitelist} contract={contract} accounts={accounts} web3={web3} />
+                  <Search
+                    whitelist={whitelist}
+                    contract={contract}
+                    accounts={accounts}
+                    web3={web3}
+                  />
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
@@ -82,7 +91,9 @@ export default function Main() {
               </Grid>
             </>
           ) : (
-            <Typography>Please connect your wallet to use this application</Typography>
+            <Typography>
+              Please connect your wallet to use this application
+            </Typography>
           )}
         </>
       ) : (

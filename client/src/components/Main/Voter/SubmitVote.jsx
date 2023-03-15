@@ -4,14 +4,14 @@ import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
-import useEvents from '../../../hooks/useEvents';
+// import useEvents from '../../../hooks/useEvents';
 
 export default function SubmitVote({ contract, accounts }) {
   const [vote, setVote] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
-  const events = useEvents('ProposalRegistered');
+  const events = [];
   const { addAlert } = useAlert();
 
   const handleChange = (event) => {

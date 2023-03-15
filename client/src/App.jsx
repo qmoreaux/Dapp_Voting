@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import { EthProvider } from './contexts/EthContext';
 import { AlertProvider } from './contexts/AlertContext';
+import AppProvider from './contexts/AppContext/AppProvider';
 
 let theme = createTheme({
   components: {
@@ -28,9 +29,11 @@ function App() {
     <AlertProvider>
       <EthProvider>
         <ThemeProvider theme={theme}>
-          <Header />
-          <Main />
-          <Footer />
+          <AppProvider>
+            <Header />
+            <Main />
+            <Footer />
+          </AppProvider>
         </ThemeProvider>
       </EthProvider>
     </AlertProvider>
