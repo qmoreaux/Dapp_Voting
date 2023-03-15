@@ -1,12 +1,15 @@
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 
+import useApp from '../../../contexts/AppContext/useApp';
+
 import EventList from './EventList';
 
-export default function Events({
-  registeredEvents,
-  proposalEvents,
-  votedEvents
-}) {
+export default function Events() {
+
+  const {
+    state: { registeredEvents, proposalEvents, votedEvents }
+  } = useApp();
+
   return (
     <Card className="events">
       <CardContent>
