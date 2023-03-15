@@ -14,13 +14,6 @@ let theme = createTheme({
           background: '#E7098F'
         }
       }
-    },
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          fill: '#9BB1D6'
-        }
-      }
     }
   },
   palette: {
