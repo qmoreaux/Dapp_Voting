@@ -19,7 +19,7 @@ const initialState = {
 const reducer = (state, action) => {
   const { type, data } = action;
   switch (type) {
-    case actions.updateRegisteredEvents:
+    case actions.updateEvents:
       return {
         ...state,
         [data.stateName]: [...state[data.stateName], ...data.events]

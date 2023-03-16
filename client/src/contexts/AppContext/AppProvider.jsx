@@ -11,7 +11,7 @@ function AppProvider({ children }) {
 
   const eth = useEth();
   const {
-    state: { contract, accounts }
+    state: { contract, accounts, deployBlock, currentBlock }
   } = eth;
 
   async function getProposalDescription(event) {
@@ -23,8 +23,8 @@ function AppProvider({ children }) {
   const getOldEvents = useCallback(
     async (eventName, stateName) => {
       let events = await contract.getPastEvents(eventName, {
-        fromBlock: 'earliest',
-        toBlock: 'latest'
+        fromBlock: deployBlock,
+        toBlock: currentBlock
       });
       if (eventName === 'ProposalRegistered') {
         events.map((event) => {
@@ -32,7 +32,7 @@ function AppProvider({ children }) {
         });
       }
       dispatch({
-        type: actions.updateRegisteredEvents,
+        type: actions.updateEvents,
         data: { events, stateName }
       });
     },
@@ -42,21 +42,20 @@ function AppProvider({ children }) {
 
   const getEvents = useCallback(
     async (eventName, stateName) => {
-      console.log(eventName, stateName);
-      await contract.events[eventName]({ fromBlock: 'earliest' })
+      await contract.events[eventName]({ fromBlock: currentBlock + 1 })
         .on('data', (event) => {
           console.log(`New event of type ${eventName}  received : ${JSON.stringify(event)}`);
           event.returnValues.new = true;
           if (eventName === 'ProposalRegistered') {
             getProposalDescription(event).then((event) => {
               dispatch({
-                type: actions.updateRegisteredEvents,
+                type: actions.updateEvents,
                 data: { events: [event], stateName }
               });
             });
           } else {
             dispatch({
-              type: actions.updateRegisteredEvents,
+              type: actions.updateEvents,
               data: { events: [event], stateName }
             });
           }
