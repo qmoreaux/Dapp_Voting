@@ -1,24 +1,34 @@
 import { useState } from 'react';
 
 import { Grid, Button, Typography } from '@mui/material';
-
-import useAlert from '../../../contexts/AlertContext/useAlert';
+import useApp from '../../../contexts/AppContext/useApp';
+import { actions } from '../../../contexts/AppContext/state';
 
 export default function SubmitProposal({ contract, accounts }) {
   const [proposalId, setProposalId] = useState(0);
   const [proposal, setProposal] = useState('');
 
-  const { addAlert } = useAlert();
+  const { dispatch } = useApp();
 
   async function getWinner() {
     try {
-      const _proposalId = await contract.methods.winningProposalID().call({ from: accounts[0] });
-      const _proposal = await contract.methods.getOneProposal(_proposalId).call({ from: accounts[0] });
+      const _proposalId = await contract.methods
+        .winningProposalID()
+        .call({ from: accounts[0] });
+      const _proposal = await contract.methods
+        .getOneProposal(_proposalId)
+        .call({ from: accounts[0] });
       setProposalId(_proposalId);
       setProposal(_proposal);
     } catch (error) {
       console.error(error);
-      addAlert({ message: error.message, severity: 'error' });
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: error.message,
+          severity: 'error'
+        }
+      });
     }
   }
 

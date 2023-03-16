@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { Stack, Card, CardContent, Grid, Typography } from '@mui/material';
 
 import Owner from './Owner';
-import useAlert from '../../../contexts/AlertContext/useAlert';
 import useApp from '../../../contexts/AppContext/useApp';
+import { actions } from '../../../contexts/AppContext/state';
 
 export default function Admin({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
@@ -12,10 +12,9 @@ export default function Admin({ contract, accounts, web3 }) {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const { addAlert } = useAlert();
-
   const {
-    state: { registeredEvents, proposalEvents, votedEvents, owner, status }
+    state: { registeredEvents, proposalEvents, votedEvents, owner, status },
+    dispatch
   } = useApp();
 
   async function addVoter() {
@@ -24,12 +23,21 @@ export default function Admin({ contract, accounts, web3 }) {
         await contract.methods.addVoter(address).call({ from: accounts[0] });
         await contract.methods.addVoter(address).send({ from: accounts[0] });
         setAddress('');
-        addAlert({
-          message: `Voter added : ${address}`,
-          severity: 'success'
+        dispatch({
+          type: actions.setAlerts,
+          data: {
+            message: `Voter added : ${address}`,
+            severity: 'success'
+          }
         });
       } catch (error) {
-        addAlert({ message: error.message, severity: 'error' });
+        dispatch({
+          type: actions.setAlerts,
+          data: {
+            message: error.message,
+            severity: 'error'
+          }
+        });
       }
     } else {
       setError(true);
@@ -65,12 +73,21 @@ export default function Admin({ contract, accounts, web3 }) {
     try {
       await contract.methods[method]().call({ from: accounts[0] });
       await contract.methods[method]().send({ from: accounts[0] });
-      addAlert({
-        message: 'Status has been changed !',
-        severity: 'success'
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: 'Status has been changed !',
+          severity: 'success'
+        }
       });
     } catch (error) {
-      addAlert({ message: error.message, severity: 'error' });
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: error.message,
+          severity: 'error'
+        }
+      });
     }
     setLoading(false);
   }

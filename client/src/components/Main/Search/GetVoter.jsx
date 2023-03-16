@@ -2,14 +2,15 @@ import { useState } from 'react';
 
 import { Stack, Button, TextField, Typography } from '@mui/material';
 
-import useAlert from '../../../contexts/AlertContext/useAlert';
+import { actions } from '../../../contexts/AppContext/state';
+import useApp from '../../../contexts/AppContext/useApp';
 
 export default function GetVoter({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState(false);
   const [voter, setVoter] = useState('');
 
-  const { addAlert } = useAlert();
+  const { dispatch } = useApp();
 
   async function getVoter() {
     if (isAddressValid()) {
@@ -19,8 +20,13 @@ export default function GetVoter({ contract, accounts, web3 }) {
           .call({ from: accounts[0] });
         setVoter({ ..._voter, address: address });
       } catch (error) {
-        console.error(error);
-        addAlert({ message: error.message, severity: 'error' });
+        dispatch({
+          type: actions.setAlerts,
+          data: {
+            message: error.message,
+            severity: 'error'
+          }
+        });
       }
     } else {
       setError(true);

@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { Stack, Button, TextField, Typography } from '@mui/material';
 
-import useAlert from '../../../contexts/AlertContext/useAlert';
 import useApp from '../../../contexts/AppContext/useApp';
+import { actions } from '../../../contexts/AppContext/state';
 
 export default function GetProposal({ contract, accounts }) {
   const [proposalID, setProposalID] = useState('');
   const [proposal, setProposal] = useState('');
 
   const {
-    state: { proposalEvents }
+    state: { proposalEvents },
+    dispatch
   } = useApp();
-
-  const { addAlert } = useAlert();
 
   const handleInputChange = (e) => {
     if (/^\d+$|^$/.test(e.target.value)) {
@@ -32,7 +31,13 @@ export default function GetProposal({ contract, accounts }) {
         .call({ from: accounts[0] });
       setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
-      addAlert({ message: error.message, severity: 'error' });
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: error.message,
+          severity: 'error'
+        }
+      });
     }
   }
 

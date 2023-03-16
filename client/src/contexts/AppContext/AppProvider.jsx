@@ -3,7 +3,6 @@ import React, { useReducer, useCallback, useEffect } from 'react';
 import { reducer, actions, initialState } from './state';
 import AppContext from './AppContext';
 import useEth from '../EthContext/useEth';
-import useAlert from '../AlertContext/useAlert';
 
 function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -14,8 +13,6 @@ function AppProvider({ children }) {
   const {
     state: { contract, accounts }
   } = eth;
-
-  const { addAlert } = useAlert();
 
   const getOldEvents = useCallback(
     async (eventName, stateName) => {
@@ -70,7 +67,13 @@ function AppProvider({ children }) {
         data: parseInt(status)
       });
     } catch (error) {
-      addAlert({ message: error.message, severity: 'error' });
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: error.message,
+          severity: 'error'
+        }
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract]);
@@ -97,13 +100,19 @@ function AppProvider({ children }) {
         let owner = await contract.methods.owner().call({ from: accounts[0] });
         updateOwner(owner);
       } catch (error) {
-        addAlert({ message: error.message, severity: 'error' });
+        dispatch({
+          type: actions.setAlerts,
+          data: {
+            message: error.message,
+            severity: 'error'
+          }
+        });
       }
     };
     if (contract && accounts) {
       tryGetOwner();
     }
-  }, [contract, accounts, addAlert, updateOwner]);
+  }, [contract, accounts, updateOwner]);
 
   useEffect(() => {
     if (contract && contract.events) {

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
-import useAlert from '../../../contexts/AlertContext/useAlert';
 import useApp from '../../../contexts/AppContext/useApp';
+import { actions } from '../../../contexts/AppContext/state';
 
 export default function SubmitVote({ contract, accounts }) {
   const [vote, setVote] = useState(0);
@@ -11,10 +11,9 @@ export default function SubmitVote({ contract, accounts }) {
   const [hasVoted, setHasVoted] = useState(false);
 
   const {
-    state: { proposalEvents }
+    state: { proposalEvents },
+    dispatch
   } = useApp();
-
-  const { addAlert } = useAlert();
 
   const handleChange = (event) => {
     setVote(event.target.value);
@@ -25,14 +24,23 @@ export default function SubmitVote({ contract, accounts }) {
     try {
       await contract.methods.setVote(vote).call({ from: accounts[0] });
       await contract.methods.setVote(vote).send({ from: accounts[0] });
-      addAlert({
-        message: `Vote submited for proposal : ${vote}`,
-        severity: 'success'
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: `Vote submited for proposal : ${vote}`,
+          severity: 'success'
+        }
       });
       setVote('');
       setHasVoted(true);
     } catch (error) {
-      addAlert({ message: error.message, severity: 'error' });
+      dispatch({
+        type: actions.setAlerts,
+        data: {
+          message: error.message,
+          severity: 'error'
+        }
+      });
     }
     setLoading(false);
   }

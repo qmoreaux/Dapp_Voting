@@ -4,8 +4,8 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Main from './components/Main';
 import { EthProvider } from './contexts/EthContext';
-import { AlertProvider } from './contexts/AlertContext';
 import AppProvider from './contexts/AppContext/AppProvider';
+import AlertComponent from './components/AlertComponent';
 
 let theme = createTheme({
   components: {
@@ -26,17 +26,16 @@ let theme = createTheme({
 
 function App() {
   return (
-    <AlertProvider>
-      <EthProvider>
-        <ThemeProvider theme={theme}>
-          <AppProvider>
-            <Header />
-            <Main />
-            <Footer />
-          </AppProvider>
-        </ThemeProvider>
-      </EthProvider>
-    </AlertProvider>
+    <EthProvider>
+      <ThemeProvider theme={theme}>
+        <AppProvider>
+          <AlertComponent />
+          <Header />
+          <Main />
+          <Footer />
+        </AppProvider>
+      </ThemeProvider>
+    </EthProvider>
   );
 }
 
