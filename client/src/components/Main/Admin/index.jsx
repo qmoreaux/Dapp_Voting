@@ -17,6 +17,10 @@ export default function Admin({ contract, accounts, web3 }) {
     dispatch
   } = useApp();
 
+  function isOwner() {
+    return owner === accounts[0];
+  }
+
   async function addVoter() {
     if (web3.utils.isAddress(address)) {
       try {
@@ -45,11 +49,7 @@ export default function Admin({ contract, accounts, web3 }) {
   }
 
   useEffect(() => {
-    if (
-      (status === 1 && proposalEvents.length === 0) ||
-      (status === 3 && votedEvents.length === 0) ||
-      status === 5
-    ) {
+    if ((status === 1 && proposalEvents.length === 0) || (status === 3 && votedEvents.length === 0) || status === 5) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -96,25 +96,29 @@ export default function Admin({ contract, accounts, web3 }) {
     <Card className="admin">
       <CardContent>
         <Stack>
-          <Typography variant="h6">Administration</Typography>
-          <Grid container spacing={2}>
-            {owner ? (
-              <Owner
-                handleWorkflow={handleWorkflow}
-                error={error}
-                address={address}
-                setError={setError}
-                setAddress={setAddress}
-                addVoter={addVoter}
-                status={status}
-                events={registeredEvents}
-                loading={loading}
-                disabled={disabled}
-              />
-            ) : (
-              <Typography>Don't have access</Typography>
-            )}
-          </Grid>
+          {isOwner() ? (
+            <>
+              <Typography variant="h6">Administration</Typography>
+              <Grid container spacing={2}>
+                <Owner
+                  handleWorkflow={handleWorkflow}
+                  error={error}
+                  address={address}
+                  setError={setError}
+                  setAddress={setAddress}
+                  addVoter={addVoter}
+                  status={status}
+                  events={registeredEvents}
+                  loading={loading}
+                  disabled={disabled}
+                />
+              </Grid>
+            </>
+          ) : (
+            <Grid>
+              <Typography>These functionnalities are only available to the owner.</Typography>
+            </Grid>
+          )}
         </Stack>
       </CardContent>
     </Card>

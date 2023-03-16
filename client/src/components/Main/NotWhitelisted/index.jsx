@@ -5,7 +5,7 @@ export default function NotWhitelisted() {
     <Grid>
       <Grid item>
         <Typography>
-          These functionnalies are only available to whitelisted users.
+          These functionnalities are only available to whitelisted users.
           <br />
           Please ask an admin to whitelist your account to use this application.
         </Typography>
