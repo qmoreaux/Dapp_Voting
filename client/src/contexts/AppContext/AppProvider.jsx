@@ -61,10 +61,6 @@ function AppProvider({ children }) {
               data: { events: [event], stateName }
             });
           }
-          dispatch({
-            type: actions.updateEvents,
-            data: { events: [event], stateName }
-          });
         })
         .on('changed', (changed) => console.log(`Event  changed: ${changed}`))
         .on('error', (err) => console.error(`Error with event : ${err}`))
