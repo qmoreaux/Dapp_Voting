@@ -2,6 +2,5 @@
 
 Les events qui se refresh au changement d'account
 Le get de la description
-Logo
 
 Code review
