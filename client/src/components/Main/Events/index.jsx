@@ -5,7 +5,6 @@ import useApp from '../../../contexts/AppContext/useApp';
 import EventList from './EventList';
 
 export default function Events() {
-
   const {
     state: { registeredEvents, proposalEvents, votedEvents }
   } = useApp();
@@ -18,21 +17,21 @@ export default function Events() {
           <Grid item xs={12} md={6} lg={4}>
             <EventList
               title="Voters"
-              elements={['voterAddress']}
+              type="voters"
               events={registeredEvents}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <EventList
               title="Proposals"
-              elements={['proposalId']}
+              type="proposals"
               events={proposalEvents}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <EventList
               title="Votes"
-              elements={['proposalId', 'voter']}
+              type="votes"
               events={votedEvents}
             />
           </Grid>

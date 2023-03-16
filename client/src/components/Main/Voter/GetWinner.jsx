@@ -12,12 +12,8 @@ export default function SubmitProposal({ contract, accounts }) {
 
   async function getWinner() {
     try {
-      const _proposalId = await contract.methods
-        .winningProposalID()
-        .call({ from: accounts[0] });
-      const _proposal = await contract.methods
-        .getOneProposal(_proposalId)
-        .call({ from: accounts[0] });
+      const _proposalId = await contract.methods.winningProposalID().call({ from: accounts[0] });
+      const _proposal = await contract.methods.getOneProposal(_proposalId).call({ from: accounts[0] });
       setProposalId(_proposalId);
       setProposal(_proposal);
     } catch (error) {

@@ -37,20 +37,10 @@ export default function Main() {
                   <Admin contract={contract} accounts={accounts} web3={web3} />
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
-                  <Voter
-                    whitelist={whitelisted}
-                    contract={contract}
-                    accounts={accounts}
-                    status={status}
-                  />
+                  <Voter whitelist={whitelisted} contract={contract} accounts={accounts} status={status} />
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
-                  <Search
-                    whitelist={whitelisted}
-                    contract={contract}
-                    accounts={accounts}
-                    web3={web3}
-                  />
+                  <Search whitelist={whitelisted} contract={contract} accounts={accounts} web3={web3} />
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
@@ -63,9 +53,7 @@ export default function Main() {
               </Grid>
             </>
           ) : (
-            <Typography>
-              Please connect your wallet to use this application
-            </Typography>
+            <Typography>Please connect your wallet to use this application</Typography>
           )}
         </>
       ) : (
