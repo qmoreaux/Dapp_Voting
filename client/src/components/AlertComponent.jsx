@@ -24,18 +24,16 @@ function AlertComponent() {
   return (
     <>
       {alerts.map((alert) => (
-        <div>
-          <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            open={open}
-            key={alert.message}
-            message={alert.message}
-            autoHideDuration={4000}
-            onClose={handleClose}
-          >
-            <Alert severity={alert.severity}>{alert.message}</Alert>
-          </Snackbar>
-        </div>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={open}
+          key={alert.message}
+          message={alert.message}
+          autoHideDuration={4000}
+          onClose={handleClose}
+        >
+          <Alert severity={alert.severity}>{alert.message}</Alert>
+        </Snackbar>
       ))}
     </>
   );

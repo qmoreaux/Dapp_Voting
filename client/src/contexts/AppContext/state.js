@@ -3,7 +3,7 @@ const actions = {
   setOwner: 'SET_OWNER',
   updateStatus: 'UPDATE_STATUS',
   updateWhitelisted: 'UPDATE_WHITELISTED',
-  setAlerts: ''
+  setAlerts: 'SET_ALERT'
 };
 
 const initialState = {

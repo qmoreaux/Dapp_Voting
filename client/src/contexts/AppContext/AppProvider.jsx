@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useEffect } from 'react';
+import React, { useReducer, useCallback, useEffect, useState } from 'react';
 
 import { reducer, actions, initialState } from './state';
 import AppContext from './AppContext';
@@ -6,6 +6,7 @@ import useEth from '../EthContext/useEth';
 
 function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [connected, setConnected] = useState(false);
 
   const {
     events: { statusEvents, registeredEvents }
@@ -131,7 +132,7 @@ function AppProvider({ children }) {
   }, [contract, accounts, updateOwner]);
 
   useEffect(() => {
-    if (contract && contract.events) {
+    if (contract && contract.events && !connected) {
       dispatch({
         type: actions.resetEvents
       });
@@ -147,6 +148,8 @@ function AppProvider({ children }) {
 
       getOldEvents('WorkflowStatusChange', 'statusEvents');
       getEvents('WorkflowStatusChange', 'statusEvents');
+
+      setConnected(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract]);

@@ -6,12 +6,14 @@ import useApp from '../../../contexts/AppContext/useApp';
 import { actions } from '../../../contexts/AppContext/state';
 
 export default function SubmitVote({ contract, accounts }) {
-  const [vote, setVote] = useState(0);
+  const [vote, setVote] = useState('');
   const [loading, setLoading] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
   const {
-    state: { proposalEvents },
+    state: {
+      events: { proposalEvents }
+    },
     dispatch
   } = useApp();
 
@@ -46,9 +48,7 @@ export default function SubmitVote({ contract, accounts }) {
   }
 
   async function checkHasVoted() {
-    const voter = await contract.methods
-      .getVoter(accounts[0])
-      .call({ from: accounts[0] });
+    const voter = await contract.methods.getVoter(accounts[0]).call({ from: accounts[0] });
     setHasVoted(voter.hasVoted);
   }
 
@@ -64,28 +64,15 @@ export default function SubmitVote({ contract, accounts }) {
       <Grid item>
         <FormControl fullWidth>
           <InputLabel id="vote-select-label">Vote</InputLabel>
-          <Select
-            labelId="vote-select-label"
-            value={vote}
-            label="Vote"
-            onChange={handleChange}
-          >
+          <Select labelId="vote-select-label" value={vote} label="Vote" onChange={handleChange}>
             {proposalEvents.map((event) => (
-              <MenuItem
-                key={event.returnValues.proposalId}
-                value={event.returnValues.proposalId}
-              >
+              <MenuItem key={event.returnValues.proposalId} value={event.returnValues.proposalId}>
                 {event.returnValues.proposalId}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-        <LoadingButton
-          loading={loading}
-          variant="contained"
-          onClick={submitVote}
-          disabled={hasVoted || !vote}
-        >
+        <LoadingButton loading={loading} variant="contained" onClick={submitVote} disabled={hasVoted || !vote}>
           {hasVoted ? 'You have already voted' : 'Vote'}
         </LoadingButton>
       </Grid>
