@@ -34,7 +34,7 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
           <Box component="div" sx={{ flexGrow: 1 }}>
-            <img src="/logo.png" alt="logo" />
+            <img src="assets/logo.png" alt="logo" />
           </Box>
           {address ? (
             <Typography>{address}</Typography>
