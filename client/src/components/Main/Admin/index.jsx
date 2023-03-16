@@ -32,7 +32,7 @@ export default function Admin({ contract, accounts, web3 }) {
         await contract.methods.addVoter(address).send({ from: accounts[0] });
         setAddress('');
         dispatch({
-          type: actions.setAlerts,
+          type: actions.setAlert,
           data: {
             message: `Voter added : ${address}`,
             severity: 'success'
@@ -40,7 +40,7 @@ export default function Admin({ contract, accounts, web3 }) {
         });
       } catch (error) {
         dispatch({
-          type: actions.setAlerts,
+          type: actions.setAlert,
           data: {
             message: error.message,
             severity: 'error'
@@ -78,7 +78,7 @@ export default function Admin({ contract, accounts, web3 }) {
       await contract.methods[method]().call({ from: accounts[0] });
       await contract.methods[method]().send({ from: accounts[0] });
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: 'Status has been changed !',
           severity: 'success'
@@ -86,7 +86,7 @@ export default function Admin({ contract, accounts, web3 }) {
       });
     } catch (error) {
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: error.message,
           severity: 'error'

@@ -21,7 +21,7 @@ export default function GetVoter({ contract, accounts, web3 }) {
         setVoter({ ..._voter, address: address });
       } catch (error) {
         dispatch({
-          type: actions.setAlerts,
+          type: actions.setAlert,
           data: {
             message: error.message,
             severity: 'error'

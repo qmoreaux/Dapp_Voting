@@ -87,7 +87,7 @@ function AppProvider({ children }) {
       });
     } catch (error) {
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: error.message,
           severity: 'error'
@@ -118,7 +118,7 @@ function AppProvider({ children }) {
         updateOwner(owner);
       } catch (error) {
         dispatch({
-          type: actions.setAlerts,
+          type: actions.setAlert,
           data: {
             message: error.message,
             severity: 'error'

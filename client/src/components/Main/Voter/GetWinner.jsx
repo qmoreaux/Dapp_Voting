@@ -19,7 +19,7 @@ export default function SubmitProposal({ contract, accounts }) {
     } catch (error) {
       console.error(error);
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: error.message,
           severity: 'error'

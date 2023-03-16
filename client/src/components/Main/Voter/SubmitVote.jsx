@@ -27,7 +27,7 @@ export default function SubmitVote({ contract, accounts }) {
       await contract.methods.setVote(vote).call({ from: accounts[0] });
       await contract.methods.setVote(vote).send({ from: accounts[0] });
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: `Vote submited for proposal : ${vote}`,
           severity: 'success'
@@ -37,7 +37,7 @@ export default function SubmitVote({ contract, accounts }) {
       setHasVoted(true);
     } catch (error) {
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: error.message,
           severity: 'error'

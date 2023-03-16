@@ -3,7 +3,7 @@ const actions = {
   setOwner: 'SET_OWNER',
   updateStatus: 'UPDATE_STATUS',
   updateWhitelisted: 'UPDATE_WHITELISTED',
-  setAlerts: 'SET_ALERT'
+  setAlert: 'SET_ALERT'
 };
 
 const initialState = {
@@ -15,7 +15,8 @@ const initialState = {
   },
   status: 0,
   whitelisted: false,
-  alerts: []
+  owner: null,
+  alert: null
 };
 
 const reducer = (state, action) => {
@@ -34,10 +35,10 @@ const reducer = (state, action) => {
       return { ...state, owner: data };
     case actions.updateWhitelisted:
       return { ...state, whitelisted: data };
-    case actions.setAlerts:
+    case actions.setAlert:
       return {
         ...state,
-        alerts: [...state.alerts, data]
+        alert: data
       };
 
     default:

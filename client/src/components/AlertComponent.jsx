@@ -5,7 +5,7 @@ import useApp from '../contexts/AppContext/useApp';
 
 function AlertComponent() {
   const {
-    state: { alerts }
+    state: { alert }
   } = useApp();
 
   const [open, setOpen] = useState(false);
@@ -19,11 +19,11 @@ function AlertComponent() {
 
   useEffect(() => {
     setOpen(true);
-  }, [alerts]);
+  }, [alert]);
 
   return (
     <>
-      {alerts.map((alert) => (
+      {alert ? (
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={open}
@@ -34,7 +34,9 @@ function AlertComponent() {
         >
           <Alert severity={alert.severity}>{alert.message}</Alert>
         </Snackbar>
-      ))}
+      ) : (
+        ''
+      )}
     </>
   );
 }

@@ -14,16 +14,12 @@ export default function SubmitProposal({ contract, accounts }) {
   async function submitProposal() {
     setLoading(true);
     try {
-      await contract.methods
-        .addProposal(description)
-        .call({ from: accounts[0] });
-      await contract.methods
-        .addProposal(description)
-        .send({ from: accounts[0] });
+      await contract.methods.addProposal(description).call({ from: accounts[0] });
+      await contract.methods.addProposal(description).send({ from: accounts[0] });
       setDescription('');
 
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: `Proposal added : ${description}`,
           severity: 'success'
@@ -31,7 +27,7 @@ export default function SubmitProposal({ contract, accounts }) {
       });
     } catch (error) {
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: error.message,
           severity: 'error'
@@ -56,12 +52,7 @@ export default function SubmitProposal({ contract, accounts }) {
           }}
         />
 
-        <LoadingButton
-          loading={loading}
-          disabled={!description.length}
-          variant="contained"
-          onClick={submitProposal}
-        >
+        <LoadingButton loading={loading} disabled={!description.length} variant="contained" onClick={submitProposal}>
           Submit
         </LoadingButton>
       </Grid>

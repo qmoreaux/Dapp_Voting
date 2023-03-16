@@ -29,7 +29,7 @@ export default function GetProposal({ contract, accounts }) {
       setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
       dispatch({
-        type: actions.setAlerts,
+        type: actions.setAlert,
         data: {
           message: error.message,
           severity: 'error'

@@ -1,12 +1,13 @@
+## Samir
+
 ## Quentin
 
 La vidéo de demo
 
-## A faire demain
+## A fix après la vidéo
+
+Les events qui se refresh au changement d'account
+Le get de la description
+Logo
 
 Code review
-
-## A discuter
-
-Revoir les events (Bug parce que useEvents est importé à de multiple endroits)
-Ne pas refresh les events au changement d'accounts
