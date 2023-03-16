@@ -14,7 +14,9 @@ export default function GetVoter({ contract, accounts, web3 }) {
   async function getVoter() {
     if (isAddressValid()) {
       try {
-        const _voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
+        const _voter = await contract.methods
+          .getVoter(address)
+          .call({ from: accounts[0] });
         setVoter({ ..._voter, address: address });
       } catch (error) {
         console.error(error);
@@ -50,42 +52,44 @@ export default function GetVoter({ contract, accounts, web3 }) {
             setAddress(event.target.value);
           }}
         />
-        <Button variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
+        <Button
+          variant="contained"
+          onClick={getVoter}
+          disabled={!isAddressValid()}
+        >
           Get
         </Button>
-        {voter ? (
+        {voter && (
           <Button variant="contained" onClick={clearVoter}>
             Clear
           </Button>
-        ) : (
-          ''
         )}
       </div>
-      {voter ? (
+      {voter && (
         <Stack className="response-container">
           <Typography className="label">Address</Typography>
           <Typography className="value"> {voter.address}</Typography>
           <Typography className="label">Registered</Typography>
-          <Typography className="value">{voter.isRegistered ? 'Yes' : 'No'}</Typography>
-          {voter.isRegistered ? (
+          <Typography className="value">
+            {voter.isRegistered ? 'Yes' : 'No'}
+          </Typography>
+          {voter.isRegistered && (
             <>
               <Typography className="label">Has voted</Typography>
-              <Typography className="value">{voter.hasVoted ? 'Yes' : 'No'}</Typography>
-              {voter.hasVoted ? (
+              <Typography className="value">
+                {voter.hasVoted ? 'Yes' : 'No'}
+              </Typography>
+              {voter.hasVoted && (
                 <>
                   <Typography className="label">Voted proposal</Typography>
-                  <Typography className="value">{voter.votedProposalId}</Typography>
+                  <Typography className="value">
+                    {voter.votedProposalId}
+                  </Typography>
                 </>
-              ) : (
-                ''
               )}
             </>
-          ) : (
-            ''
           )}
         </Stack>
-      ) : (
-        ''
       )}
     </Stack>
   );

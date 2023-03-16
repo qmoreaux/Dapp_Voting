@@ -130,6 +130,7 @@
 /* main */
 .container-main {
   margin-top: 50px;
+  padding-bottom: 100px;
 }
 
 /* stepper */
@@ -146,6 +147,9 @@
 
 .events .MuiStack-root {
   align-items: flex-start;
+  justify-content: flex-start;
+}
+.events .MuiGrid-container {
   padding: 1rem;
 }
 

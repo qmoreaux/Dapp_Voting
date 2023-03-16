@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
-import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+
+import useEth from '../contexts/EthContext/useEth';
 
 export default function Header() {
   const {
@@ -14,7 +14,11 @@ export default function Header() {
     if (accounts) {
       let _address = accounts[0];
 
-      setAddress(_address.substring(0, 5) + '...' + _address.substring(_address.length - 4));
+      setAddress(
+        _address.substring(0, 5) +
+          '...' +
+          _address.substring(_address.length - 4)
+      );
     }
   }, [accounts]);
 
@@ -35,7 +39,7 @@ export default function Header() {
           {address ? (
             <Typography>{address}</Typography>
           ) : (
-            <>{window.ethereum ? <Button onClick={tryInit}>Connect</Button> : ''}</>
+            window.ethereum && <Button onClick={tryInit}>Connect</Button>
           )}
         </Toolbar>
       </AppBar>
