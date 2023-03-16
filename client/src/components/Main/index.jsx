@@ -1,42 +1,24 @@
 import { useState, useEffect } from 'react';
-import { Container, Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import { Container, Typography, Grid } from '@mui/material';
 
 import Admin from './Admin';
 import Voter from './Voter';
 import Search from './Search';
 import Events from './Events';
 import HorizontalStepper from './Stepper';
-
 import useEth from '../../contexts/EthContext/useEth';
-import useOwner from '../../hooks/useOwner';
-import useStatus from '../../hooks/useStatus';
+import useApp from '../../contexts/AppContext/useApp';
+
 export default function Main() {
   const {
     state: { contract, accounts, web3 }
   } = useEth();
-  const registeredEvents = [];
-  const proposalEvents = [];
-  const votedEvents = [];
-  const owner = useOwner();
-  const status = useStatus();
 
-  const [whitelist, setWhitelist] = useState(false);
+  const {
+    state: { status, whitelisted }
+  } = useApp();
 
   const [metamask, setMetamask] = useState(false);
-
-  useEffect(() => {
-    let whitelisted = false;
-    registeredEvents.forEach((event) => {
-      if (event.returnValues.voterAddress === accounts[0]) {
-        setWhitelist(true);
-        whitelisted = true;
-      }
-    });
-    if (!whitelisted) {
-      setWhitelist(false);
-    }
-  }, [accounts, registeredEvents]);
 
   useEffect(() => {
     if (window.ethereum) {
@@ -52,17 +34,11 @@ export default function Main() {
             <>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6} lg={4}>
-                  <Admin
-                    contract={contract}
-                    accounts={accounts}
-                    web3={web3}
-                    owner={accounts && accounts[0] === owner}
-                    status={status}
-                  />
+                  <Admin contract={contract} accounts={accounts} web3={web3} />
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
                   <Voter
-                    whitelist={whitelist}
+                    whitelist={whitelisted}
                     contract={contract}
                     accounts={accounts}
                     status={status}
@@ -70,7 +46,7 @@ export default function Main() {
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
                   <Search
-                    whitelist={whitelist}
+                    whitelist={whitelisted}
                     contract={contract}
                     accounts={accounts}
                     web3={web3}
@@ -82,11 +58,7 @@ export default function Main() {
                   <HorizontalStepper />
                 </Grid>
                 <Grid item xs={12}>
-                  <Events
-                    registeredEvents={registeredEvents}
-                    proposalEvents={proposalEvents}
-                    votedEvents={votedEvents}
-                  />
+                  <Events />
                 </Grid>
               </Grid>
             </>

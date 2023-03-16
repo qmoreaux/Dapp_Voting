@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
-
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
-// import useEvents from '../../../hooks/useEvents';
+import useApp from '../../../contexts/AppContext/useApp';
 
 export default function SubmitVote({ contract, accounts }) {
   const [vote, setVote] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
 
-  const events = [];
+  const {
+    state: { proposalEvents }
+  } = useApp();
+
   const { addAlert } = useAlert();
 
   const handleChange = (event) => {
@@ -30,7 +32,6 @@ export default function SubmitVote({ contract, accounts }) {
       setVote('');
       setHasVoted(true);
     } catch (error) {
-      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
     setLoading(false);
@@ -55,14 +56,13 @@ export default function SubmitVote({ contract, accounts }) {
       <Grid item>
         <FormControl fullWidth>
           <InputLabel id="vote-select-label">Vote</InputLabel>
-
           <Select
             labelId="vote-select-label"
             value={vote}
             label="Vote"
             onChange={handleChange}
           >
-            {events.map((event) => (
+            {proposalEvents.map((event) => (
               <MenuItem
                 key={event.returnValues.proposalId}
                 value={event.returnValues.proposalId}
@@ -72,7 +72,6 @@ export default function SubmitVote({ contract, accounts }) {
             ))}
           </Select>
         </FormControl>
-
         <LoadingButton
           loading={loading}
           variant="contained"

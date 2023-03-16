@@ -1,6 +1,5 @@
 import { Box, Stepper, Step, StepLabel } from '@mui/material';
-
-import useStatus from '../../hooks/useStatus';
+import useApp from '../../contexts/AppContext/useApp';
 
 const steps = [
   'Voters Registration',
@@ -12,7 +11,9 @@ const steps = [
 ];
 
 export default function HorizontalStepper() {
-  const status = useStatus();
+  const {
+    state: { status }
+  } = useApp();
 
   return (
     <Box className="stepper">

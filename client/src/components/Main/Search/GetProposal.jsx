@@ -1,14 +1,16 @@
 import { useState } from 'react';
-
 import { Stack, Button, TextField, Typography } from '@mui/material';
 
 import useAlert from '../../../contexts/AlertContext/useAlert';
+import useApp from '../../../contexts/AppContext/useApp';
 
 export default function GetProposal({ contract, accounts }) {
   const [proposalID, setProposalID] = useState('');
   const [proposal, setProposal] = useState('');
 
-  const events = [];
+  const {
+    state: { proposalEvents }
+  } = useApp();
 
   const { addAlert } = useAlert();
 
@@ -18,14 +20,10 @@ export default function GetProposal({ contract, accounts }) {
     }
   };
 
-  const isValidProposalId = () => {
-    return events.find((event) => {
-      if (event.returnValues.proposalId === proposalID) {
-        return true;
-      }
-      return false;
-    });
-  };
+  const isValidProposalId = () =>
+    proposalEvents.find(
+      (event) => event.returnValues.proposalId === proposalID
+    );
 
   async function getProposal() {
     try {
@@ -34,7 +32,6 @@ export default function GetProposal({ contract, accounts }) {
         .call({ from: accounts[0] });
       setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
-      console.error(error);
       addAlert({ message: error.message, severity: 'error' });
     }
   }
@@ -61,15 +58,13 @@ export default function GetProposal({ contract, accounts }) {
         >
           Get
         </Button>
-        {proposal ? (
+        {proposal && (
           <Button variant="contained" onClick={clearProposal}>
             Clear
           </Button>
-        ) : (
-          ''
         )}
       </div>
-      {proposal ? (
+      {proposal && (
         <Stack className="response-container">
           <Typography className="label">Proposal ID</Typography>
           <Typography className="value"> {proposal.proposalID}</Typography>
@@ -78,8 +73,6 @@ export default function GetProposal({ contract, accounts }) {
           <Typography className="label">Vote count</Typography>
           <Typography className="value">{proposal.voteCount}</Typography>
         </Stack>
-      ) : (
-        ''
       )}
     </Stack>
   );
