@@ -2,7 +2,8 @@ const actions = {
   updateEvents: 'UPDATE_EVENTS',
   setOwner: 'SET_OWNER',
   updateStatus: 'UPDATE_STATUS',
-  updateWhitelisted: 'UPDATE_WHITELISTED'
+  updateWhitelisted: 'UPDATE_WHITELISTED',
+  setAlerts: ''
 };
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   votedEvents: [],
   statusEvents: [],
   status: 0,
-  whitelisted: false
+  whitelisted: false,
+  alerts: []
 };
 
 const reducer = (state, action) => {
@@ -29,6 +31,11 @@ const reducer = (state, action) => {
       return { ...state, owner: data };
     case actions.updateWhitelisted:
       return { ...state, whitelisted: data };
+    case actions.setAlerts:
+      return {
+        ...state,
+        alerts: [...state.alerts, data]
+      };
 
     default:
       throw new Error('Undefined reducer action type');
