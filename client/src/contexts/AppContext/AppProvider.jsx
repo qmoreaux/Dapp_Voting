@@ -7,7 +7,9 @@ import useEth from '../EthContext/useEth';
 function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { statusEvents, registeredEvents } = state;
+  const {
+    events: { statusEvents, registeredEvents }
+  } = state;
 
   const eth = useEth();
   const {
@@ -59,6 +61,10 @@ function AppProvider({ children }) {
               data: { events: [event], stateName }
             });
           }
+          dispatch({
+            type: actions.updateEvents,
+            data: { events: [event], stateName }
+          });
         })
         .on('changed', (changed) => console.log(`Event  changed: ${changed}`))
         .on('error', (err) => console.error(`Error with event : ${err}`))
@@ -130,6 +136,10 @@ function AppProvider({ children }) {
 
   useEffect(() => {
     if (contract && contract.events) {
+      dispatch({
+        type: actions.resetEvents
+      });
+
       getOldEvents('VoterRegistered', 'registeredEvents');
       getEvents('VoterRegistered', 'registeredEvents');
 

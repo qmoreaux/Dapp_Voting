@@ -6,7 +6,9 @@ import EventList from './EventList';
 
 export default function Events() {
   const {
-    state: { registeredEvents, proposalEvents, votedEvents }
+    state: {
+      events: { registeredEvents, proposalEvents, votedEvents }
+    }
   } = useApp();
 
   return (
@@ -15,25 +17,13 @@ export default function Events() {
         <Typography variant="h6">Events</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} lg={4}>
-            <EventList
-              title="Voters"
-              type="voters"
-              events={registeredEvents}
-            />
+            <EventList title="Voters" type="voters" events={registeredEvents} />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <EventList
-              title="Proposals"
-              type="proposals"
-              events={proposalEvents}
-            />
+            <EventList title="Proposals" type="proposals" events={proposalEvents} />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <EventList
-              title="Votes"
-              type="votes"
-              events={votedEvents}
-            />
+            <EventList title="Votes" type="votes" events={votedEvents} />
           </Grid>
         </Grid>
       </CardContent>

@@ -7,10 +7,12 @@ const actions = {
 };
 
 const initialState = {
-  registeredEvents: [],
-  proposalEvents: [],
-  votedEvents: [],
-  statusEvents: [],
+  events: {
+    registeredEvents: [],
+    proposalEvents: [],
+    votedEvents: [],
+    statusEvents: []
+  },
   status: 0,
   whitelisted: false,
   alerts: []
@@ -22,9 +24,10 @@ const reducer = (state, action) => {
     case actions.updateEvents:
       return {
         ...state,
-        [data.stateName]: [...state[data.stateName], ...data.events]
+        events: { ...state.events, [data.stateName]: [...state.events[data.stateName], ...data.events] }
       };
-
+    case actions.resetEvents:
+      return { ...state, events: { registeredEvents: [], proposalEvents: [], votedEvents: [], statusEvents: [] } };
     case actions.updateStatus:
       return { ...state, status: data };
     case actions.setOwner:

@@ -13,7 +13,11 @@ export default function Admin({ contract, accounts, web3 }) {
   const [disabled, setDisabled] = useState(false);
 
   const {
-    state: { registeredEvents, proposalEvents, votedEvents, owner, status },
+    state: {
+      events: { registeredEvents, proposalEvents, votedEvents },
+      owner,
+      status
+    },
     dispatch
   } = useApp();
 

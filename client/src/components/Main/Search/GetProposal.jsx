@@ -9,7 +9,9 @@ export default function GetProposal({ contract, accounts }) {
   const [proposal, setProposal] = useState('');
 
   const {
-    state: { proposalEvents },
+    state: {
+      events: { proposalEvents }
+    },
     dispatch
   } = useApp();
 
@@ -19,16 +21,11 @@ export default function GetProposal({ contract, accounts }) {
     }
   };
 
-  const isValidProposalId = () =>
-    proposalEvents.find(
-      (event) => event.returnValues.proposalId === proposalID
-    );
+  const isValidProposalId = () => proposalEvents.find((event) => event.returnValues.proposalId === proposalID);
 
   async function getProposal() {
     try {
-      const _proposal = await contract.methods
-        .getOneProposal(proposalID)
-        .call({ from: accounts[0] });
+      const _proposal = await contract.methods.getOneProposal(proposalID).call({ from: accounts[0] });
       setProposal({ ..._proposal, proposalID: proposalID });
     } catch (error) {
       dispatch({
@@ -50,17 +47,8 @@ export default function GetProposal({ contract, accounts }) {
     <Stack className="stack-search">
       <Typography>Get Proposal</Typography>
       <div>
-        <TextField
-          size="small"
-          label="Proposal ID"
-          value={proposalID}
-          onChange={handleInputChange}
-        />
-        <Button
-          variant="contained"
-          onClick={getProposal}
-          disabled={!isValidProposalId()}
-        >
+        <TextField size="small" label="Proposal ID" value={proposalID} onChange={handleInputChange} />
+        <Button variant="contained" onClick={getProposal} disabled={!isValidProposalId()}>
           Get
         </Button>
         {proposal && (
