@@ -11,6 +11,9 @@ function EthProvider({ children }) {
       const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8545');
       const accounts = await web3.eth.requestAccounts();
       const networkID = await web3.eth.net.getId();
+      const deployTransaction = await web3.eth.getTransaction(artifact.networks[networkID].transactionHash);
+      const deployBlock = deployTransaction.blockNumber;
+      const currentBlock = await web3.eth.getBlockNumber();
       const { abi } = artifact;
       let address, contract;
       try {
@@ -21,7 +24,7 @@ function EthProvider({ children }) {
       }
       dispatch({
         type: actions.init,
-        data: { artifact, web3, accounts, networkID, contract }
+        data: { artifact, web3, accounts, networkID, contract, deployBlock, currentBlock }
       });
     }
   }, []);

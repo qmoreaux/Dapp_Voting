@@ -1,5 +1,5 @@
 const actions = {
-  init: "INIT"
+  init: 'INIT'
 };
 
 const initialState = {
@@ -7,7 +7,9 @@ const initialState = {
   web3: null,
   accounts: null,
   networkID: null,
-  contract: null
+  contract: null,
+  deployBlock: null,
+  currentBlock: null
 };
 
 const reducer = (state, action) => {
@@ -16,7 +18,7 @@ const reducer = (state, action) => {
     case actions.init:
       return { ...state, ...data };
     default:
-      throw new Error("Undefined reducer action type");
+      throw new Error('Undefined reducer action type');
   }
 };
 
