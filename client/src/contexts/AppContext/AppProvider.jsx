@@ -18,7 +18,9 @@ function AppProvider({ children }) {
   } = eth;
 
   async function getProposalDescription(event) {
-    const _proposal = await contract.methods.getOneProposal(event.returnValues.proposalId).call({ from: accounts[0] });
+    const _proposal = await contract.methods
+      .getOneProposal(event.returnValues.proposalId)
+      .call({ from: accounts[0] });
     event.returnValues.description = _proposal.description;
     return event;
   }
@@ -45,22 +47,30 @@ function AppProvider({ children }) {
 
   const getEvents = useCallback(
     async (eventName, stateName) => {
+      let txHash;
       await contract.events[eventName]({ fromBlock: currentBlock + 1 })
         .on('data', (event) => {
-          console.log(`New event of type ${eventName}  received : ${JSON.stringify(event)}`);
-          event.returnValues.new = true;
-          if (eventName === 'ProposalRegistered') {
-            getProposalDescription(event).then((event) => {
+          if (txHash !== event.transactionHash) {
+            txHash = event.transactionHash;
+            console.log(
+              `New event of type ${eventName}  received : ${JSON.stringify(
+                event
+              )}`
+            );
+            event.returnValues.new = true;
+            if (eventName === 'ProposalRegistered') {
+              getProposalDescription(event).then((event) => {
+                dispatch({
+                  type: actions.updateEvents,
+                  data: { events: [event], stateName }
+                });
+              });
+            } else {
               dispatch({
                 type: actions.updateEvents,
                 data: { events: [event], stateName }
               });
-            });
-          } else {
-            dispatch({
-              type: actions.updateEvents,
-              data: { events: [event], stateName }
-            });
+            }
           }
         })
         .on('changed', (changed) => console.log(`Event  changed: ${changed}`))
@@ -80,7 +90,9 @@ function AppProvider({ children }) {
 
   const getStatus = useCallback(async () => {
     try {
-      const status = await contract.methods.workflowStatus().call({ from: accounts[0] });
+      const status = await contract.methods
+        .workflowStatus()
+        .call({ from: accounts[0] });
       dispatch({
         type: actions.updateStatus,
         data: parseInt(status)
@@ -98,7 +110,9 @@ function AppProvider({ children }) {
   }, [contract]);
 
   useEffect(() => {
-    let whitelisted = registeredEvents.find((event) => event.returnValues.voterAddress === accounts[0]);
+    let whitelisted = registeredEvents.find(
+      (event) => event.returnValues.voterAddress === accounts[0]
+    );
     dispatch({
       type: actions.updateWhitelisted,
       data: whitelisted
