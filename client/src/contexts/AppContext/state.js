@@ -27,8 +27,6 @@ const reducer = (state, action) => {
         ...state,
         events: { ...state.events, [data.stateName]: [...state.events[data.stateName], ...data.events] }
       };
-    case actions.resetEvents:
-      return { ...state, events: { registeredEvents: [], proposalEvents: [], votedEvents: [], statusEvents: [] } };
     case actions.updateStatus:
       return { ...state, status: data };
     case actions.setOwner:

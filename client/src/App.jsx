@@ -1,11 +1,12 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import Footer from './components/Footer';
 import Header from './components/Header';
-import Main from './components/Main';
-import { EthProvider } from './contexts/EthContext';
-import AppProvider from './contexts/AppContext/AppProvider';
 import AlertComponent from './components/AlertComponent';
+import Main from './components/Main';
+import Footer from './components/Footer';
+
+import { EthProvider } from './contexts/EthContext';
+import { AppProvider } from './contexts/AppContext';
 
 let theme = createTheme({
   components: {
@@ -29,8 +30,8 @@ function App() {
     <EthProvider>
       <ThemeProvider theme={theme}>
         <AppProvider>
-          <AlertComponent />
           <Header />
+          <AlertComponent />
           <Main />
           <Footer />
         </AppProvider>

@@ -6,6 +6,7 @@ import Voter from './Voter';
 import Search from './Search';
 import Events from './Events';
 import HorizontalStepper from './Stepper';
+
 import useEth from '../../contexts/EthContext/useEth';
 import useApp from '../../contexts/AppContext/useApp';
 

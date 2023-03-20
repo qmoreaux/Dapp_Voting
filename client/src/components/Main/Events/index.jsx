@@ -1,8 +1,8 @@
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 
-import useApp from '../../../contexts/AppContext/useApp';
-
 import EventList from './EventList';
+
+import useApp from '../../../contexts/AppContext/useApp';
 
 export default function Events() {
   const {

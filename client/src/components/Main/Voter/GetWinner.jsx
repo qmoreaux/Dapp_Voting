@@ -1,6 +1,6 @@
 import { useState } from 'react';
-
 import { Grid, Button, Typography } from '@mui/material';
+
 import useApp from '../../../contexts/AppContext/useApp';
 import { actions } from '../../../contexts/AppContext/state';
 
@@ -17,7 +17,6 @@ export default function SubmitProposal({ contract, accounts }) {
       setProposalId(_proposalId);
       setProposal(_proposal);
     } catch (error) {
-      console.error(error);
       dispatch({
         type: actions.setAlert,
         data: {
@@ -39,6 +38,8 @@ export default function SubmitProposal({ contract, accounts }) {
             Winning Proposal ID : <b>{proposalId}</b>
             <br />
             Winning Proposal Description : <b>{proposal.description}</b>
+            <br />
+            Winning Proposal Vote Count : <b>{proposal.voteCount}</b>
           </Typography>
         ) : (
           ''

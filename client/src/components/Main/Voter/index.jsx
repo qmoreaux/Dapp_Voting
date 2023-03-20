@@ -1,9 +1,9 @@
+import { Card, CardContent, Stack, Grid, Typography } from '@mui/material';
+
 import NotWhitelisted from '../NotWhitelisted';
 import SubmitProposal from './SubmitProposal';
 import SubmitVote from './SubmitVote';
 import GetWinner from './GetWinner';
-
-import { Card, CardContent, Stack, Grid, Typography } from '@mui/material';
 
 export default function Voter({ whitelist, contract, accounts, status }) {
   function getStatusTitle() {

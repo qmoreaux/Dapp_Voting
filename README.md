@@ -35,7 +35,7 @@ The demo video is available [here](https://www.loom.com/share/954c26b76928497ba3
 ## Public access
 
 - The Smart Contract is deployed :
-    - On Goerli at the following address [0x35d60F7481B514ead969AABB97c1c72edceb05Dd](https://goerli.etherscan.io/address/0x35d60F7481B514ead969AABB97c1c72edceb05Dd)
-    - On Mumbai at the following address [0xcFaF3116F381d88cF1C1eDd904cd607e2c1a61D1](https://mumbai.polygonscan.com/address/0xcFaF3116F381d88cF1C1eDd904cd607e2c1a61D1)
+  - On Goerli at the following address [0x35d60F7481B514ead969AABB97c1c72edceb05Dd](https://goerli.etherscan.io/address/0x35d60F7481B514ead969AABB97c1c72edceb05Dd)
+  - On Mumbai at the following address [0xcFaF3116F381d88cF1C1eDd904cd607e2c1a61D1](https://mumbai.polygonscan.com/address/0xcFaF3116F381d88cF1C1eDd904cd607e2c1a61D1)
 
 - The DApp is available at the following address : [https://dapp-voting-delta.vercel.app/](https://dapp-voting-delta.vercel.app/)

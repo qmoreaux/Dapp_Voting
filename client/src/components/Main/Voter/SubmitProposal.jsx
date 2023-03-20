@@ -1,9 +1,9 @@
 import { useState } from 'react';
-
 import { Grid, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { actions } from '../../../contexts/AppContext/state';
+
 import useApp from '../../../contexts/AppContext/useApp';
+import { actions } from '../../../contexts/AppContext/state';
 
 export default function SubmitProposal({ contract, accounts }) {
   const [description, setDescription] = useState('');

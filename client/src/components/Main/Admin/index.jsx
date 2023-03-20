@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-
 import { Stack, Card, CardContent, Grid, Typography } from '@mui/material';
 
 import Owner from './Owner';
+
 import useApp from '../../../contexts/AppContext/useApp';
 import { actions } from '../../../contexts/AppContext/state';
 
@@ -14,7 +14,7 @@ export default function Admin({ contract, accounts, web3 }) {
 
   const {
     state: {
-      events: { registeredEvents, proposalEvents, votedEvents },
+      events: { proposalEvents, votedEvents },
       owner,
       status
     },
@@ -112,7 +112,6 @@ export default function Admin({ contract, accounts, web3 }) {
                   setAddress={setAddress}
                   addVoter={addVoter}
                   status={status}
-                  events={registeredEvents}
                   loading={loading}
                   disabled={disabled}
                 />

@@ -2,7 +2,7 @@ import { Grid, Typography } from '@mui/material';
 
 export default function NotWhitelisted() {
   return (
-    <Grid>
+    <Grid container>
       <Grid item>
         <Typography>
           These functionnalities are only available to whitelisted users.

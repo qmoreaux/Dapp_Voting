@@ -1,35 +1,27 @@
 import { useState } from 'react';
-
 import { Stack, Button, TextField, Typography } from '@mui/material';
 
-import { actions } from '../../../contexts/AppContext/state';
 import useApp from '../../../contexts/AppContext/useApp';
+import { actions } from '../../../contexts/AppContext/state';
 
 export default function GetVoter({ contract, accounts, web3 }) {
   const [address, setAddress] = useState('');
-  const [error, setError] = useState(false);
   const [voter, setVoter] = useState('');
 
   const { dispatch } = useApp();
 
   async function getVoter() {
-    if (isAddressValid()) {
-      try {
-        const _voter = await contract.methods
-          .getVoter(address)
-          .call({ from: accounts[0] });
-        setVoter({ ..._voter, address: address });
-      } catch (error) {
-        dispatch({
-          type: actions.setAlert,
-          data: {
-            message: error.message,
-            severity: 'error'
-          }
-        });
-      }
-    } else {
-      setError(true);
+    try {
+      const _voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
+      setVoter({ ..._voter, address: address });
+    } catch (error) {
+      dispatch({
+        type: actions.setAlert,
+        data: {
+          message: error.message,
+          severity: 'error'
+        }
+      });
     }
   }
 
@@ -48,21 +40,14 @@ export default function GetVoter({ contract, accounts, web3 }) {
       <div>
         <TextField
           size="small"
-          error={error}
           id="outlined-error-helper-text"
           label="Voter Address"
           value={address}
-          helperText={error && 'Invalid address'}
           onChange={(event) => {
-            setError(false);
             setAddress(event.target.value);
           }}
         />
-        <Button
-          variant="contained"
-          onClick={getVoter}
-          disabled={!isAddressValid()}
-        >
+        <Button variant="contained" onClick={getVoter} disabled={!isAddressValid()}>
           Get
         </Button>
         {voter && (
@@ -76,21 +61,15 @@ export default function GetVoter({ contract, accounts, web3 }) {
           <Typography className="label">Address</Typography>
           <Typography className="value"> {voter.address}</Typography>
           <Typography className="label">Registered</Typography>
-          <Typography className="value">
-            {voter.isRegistered ? 'Yes' : 'No'}
-          </Typography>
+          <Typography className="value">{voter.isRegistered ? 'Yes' : 'No'}</Typography>
           {voter.isRegistered && (
             <>
               <Typography className="label">Has voted</Typography>
-              <Typography className="value">
-                {voter.hasVoted ? 'Yes' : 'No'}
-              </Typography>
+              <Typography className="value">{voter.hasVoted ? 'Yes' : 'No'}</Typography>
               {voter.hasVoted && (
                 <>
                   <Typography className="label">Voted proposal</Typography>
-                  <Typography className="value">
-                    {voter.votedProposalId}
-                  </Typography>
+                  <Typography className="value">{voter.votedProposalId}</Typography>
                 </>
               )}
             </>

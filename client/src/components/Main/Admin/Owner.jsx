@@ -9,7 +9,6 @@ export default function Owner({
   setAddress,
   addVoter,
   status,
-  events,
   loading,
   handleWorkflow,
   disabled
@@ -35,16 +34,10 @@ export default function Owner({
           </Button>
         </Grid>
       )}
-      {events.length > 0 && (
-        <Grid item display={'flex'} justifyContent={'center'}>
-          <WorkflowButton
-            loading={loading}
-            status={status}
-            handleWorkflow={handleWorkflow}
-            disabled={disabled}
-          />
-        </Grid>
-      )}
+
+      <Grid item display={'flex'} justifyContent={'center'}>
+        <WorkflowButton loading={loading} status={status} handleWorkflow={handleWorkflow} disabled={disabled} />
+      </Grid>
     </>
   );
 }

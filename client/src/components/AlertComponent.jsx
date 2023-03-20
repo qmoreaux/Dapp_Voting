@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-
 import { Snackbar, Alert } from '@mui/material';
+
 import useApp from '../contexts/AppContext/useApp';
 
 function AlertComponent() {

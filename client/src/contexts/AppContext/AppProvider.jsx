@@ -18,9 +18,7 @@ function AppProvider({ children }) {
   } = eth;
 
   async function getProposalDescription(event) {
-    const _proposal = await contract.methods
-      .getOneProposal(event.returnValues.proposalId)
-      .call({ from: accounts[0] });
+    const _proposal = await contract.methods.getOneProposal(event.returnValues.proposalId).call({ from: accounts[0] });
     event.returnValues.description = _proposal.description;
     return event;
   }
@@ -52,11 +50,7 @@ function AppProvider({ children }) {
         .on('data', (event) => {
           if (txHash !== event.transactionHash) {
             txHash = event.transactionHash;
-            console.log(
-              `New event of type ${eventName}  received : ${JSON.stringify(
-                event
-              )}`
-            );
+            console.log(`New event of type ${eventName}  received : ${JSON.stringify(event)}`);
             event.returnValues.new = true;
             if (eventName === 'ProposalRegistered') {
               getProposalDescription(event).then((event) => {
@@ -90,9 +84,7 @@ function AppProvider({ children }) {
 
   const getStatus = useCallback(async () => {
     try {
-      const status = await contract.methods
-        .workflowStatus()
-        .call({ from: accounts[0] });
+      const status = await contract.methods.workflowStatus().call({ from: accounts[0] });
       dispatch({
         type: actions.updateStatus,
         data: parseInt(status)
@@ -110,9 +102,7 @@ function AppProvider({ children }) {
   }, [contract]);
 
   useEffect(() => {
-    let whitelisted = registeredEvents.find(
-      (event) => event.returnValues.voterAddress === accounts[0]
-    );
+    let whitelisted = registeredEvents.find((event) => event.returnValues.voterAddress === accounts[0]);
     dispatch({
       type: actions.updateWhitelisted,
       data: whitelisted
@@ -147,9 +137,6 @@ function AppProvider({ children }) {
 
   useEffect(() => {
     if (contract && contract.events && !connected) {
-      dispatch({
-        type: actions.resetEvents
-      });
 
       getOldEvents('VoterRegistered', 'registeredEvents');
       getEvents('VoterRegistered', 'registeredEvents');
